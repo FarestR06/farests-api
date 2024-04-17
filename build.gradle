@@ -1,11 +1,21 @@
+
+buildscript {
+	repositories {
+		maven {
+			name = "Jitpack"
+			url ''
+		}
+	}
+}
 plugins {
 	id 'fabric-loom' version '1.5-SNAPSHOT'
 	id 'maven-publish'
 }
+apply plugin: 'java'
 apply plugin: 'maven-publish'
 
-version = project.mod_version
 group = project.maven_group
+version = project.mod_version
 
 base {
 	archivesName = project.archives_base_name
@@ -71,7 +81,7 @@ jar {
 // configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		maven(MavenPublication) {
 			from components.java
 		}
 	}
@@ -82,6 +92,10 @@ publishing {
 		// Notice: This block does NOT have the same function as the block in the top level.
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
-		maven { url "https://jitpack.io"  }
-	}
+		mavenCentral()
+		maven { url "https://jitpack.io" }	}
+}
+
+wrapper {
+
 }
