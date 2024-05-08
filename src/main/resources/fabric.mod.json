@@ -20,11 +20,15 @@
 		],
 		"fabric-datagen": [
 			"com.farestr06.api.FarestsAPIDataGenerator"
+		],
+		"mm:early_risers": [
+			"com.farestr06.api.example.FarestsAPIExampleEarlyRisers"
 		]
 	},
 	"mixins": [
 		"fr06-api.mixins.json"
 	],
+	"accessWidener": "fr06-api.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.15.7",
 		"minecraft": "~1.20.4",

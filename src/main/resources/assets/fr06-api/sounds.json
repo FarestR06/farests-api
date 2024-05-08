@@ -1,0 +1,10 @@
+{
+  "block.note_block.screamer": {
+    "sounds": [
+      {
+        "name": "fr06-api:test",
+        "volume": 0.5
+      }
+    ]
+  }
+}

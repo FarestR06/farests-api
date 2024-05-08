@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "fr06-api:block/screamer"
+    }
+  }
+}
