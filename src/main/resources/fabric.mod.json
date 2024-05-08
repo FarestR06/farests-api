@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "fr06-api",
-	"version": "${mod_version}",
+	"version": "${version}",
 	"name": "Farest's API",
 	"description": "Various utilities",
 	"authors": [
