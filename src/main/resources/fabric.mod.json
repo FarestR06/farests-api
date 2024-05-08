@@ -1,17 +1,17 @@
 {
 	"schemaVersion": 1,
 	"id": "fr06-api",
-	"version": "${version}",
+	"version": "${mod_version}",
 	"name": "Farest's API",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Various utilities",
 	"authors": [
-		"Me!"
+		"FarestR06"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
+	"license": "LGPLv2",
 	"icon": "assets/fr06-api/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -30,9 +30,9 @@
 	],
 	"accessWidener": "fr06-api.accesswidener",
 	"depends": {
-		"fabricloader": ">=0.15.7",
-		"minecraft": "~1.20.4",
-		"java": ">=17",
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.20.6",
+		"java": ">=21",
 		"fabric-api": "*"
 	},
 	"suggests": {
