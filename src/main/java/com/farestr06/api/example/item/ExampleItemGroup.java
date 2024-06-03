@@ -1,4 +1,4 @@
-package com.farestr06.api.item;
+package com.farestr06.api.example.item;
 
 import com.farestr06.api.FarestsAPI;
 import com.farestr06.api.example.ExampleBlock;

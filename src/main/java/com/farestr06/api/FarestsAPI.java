@@ -1,7 +1,7 @@
 package com.farestr06.api;
 
 import com.farestr06.api.example.ExampleBlock;
-import com.farestr06.api.item.ExampleItemGroup;
+import com.farestr06.api.example.item.ExampleItemGroup;
 import com.farestr06.api.example.ExampleSound;
 import net.fabricmc.api.ModInitializer;
 
