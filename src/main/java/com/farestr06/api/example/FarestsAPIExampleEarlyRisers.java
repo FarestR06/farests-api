@@ -1,11 +1,11 @@
 package com.farestr06.api.example;
 
 import com.chocohead.mm.api.EnumAdder;
-import com.farestr06.api.asm.EarlyRiserImpl;
+import com.farestr06.api.asm.EarlyRiserHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.enums.Instrument;
 
-public class FarestsAPIExampleEarlyRisers implements EarlyRiserImpl {
+public class FarestsAPIExampleEarlyRisers implements EarlyRiserHelper {
 
     @Override
     public void run() {

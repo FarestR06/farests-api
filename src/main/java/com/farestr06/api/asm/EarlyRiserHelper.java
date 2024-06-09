@@ -6,11 +6,11 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.MappingResolver;
 
 /**
- * This class can be used as an Early Riser class when using Manningham Mills.
+ * Implementations of this interface can be used as an Early Riser class when using Manningham Mills.
  * It extends the {@link Runnable Runnable} interface and contains extra utilities for adding to various enums.
  * @see java.lang.Runnable
  */
-public interface EarlyRiserImpl extends Runnable {
+public interface EarlyRiserHelper extends Runnable {
 
     @Override
     void run();

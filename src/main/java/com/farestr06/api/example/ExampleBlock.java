@@ -2,21 +2,26 @@ package com.farestr06.api.example;
 
 import com.chocohead.mm.api.ClassTinkerers;
 import com.farestr06.api.FarestsAPI;
+import com.farestr06.api.util.RegistryHelper;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 
 public class ExampleBlock {
-    public static final Block SCREAMER = Registry.register(Registries.BLOCK, new Identifier("fr06-api", "screamer"),
-            new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK).instrument(ClassTinkerers.getEnum(Instrument.class, "SCREAMER"))));
-    public static final Item SCREAMER_ITEM = Registry.register(Registries.ITEM, new Identifier("fr06-api", "screamer"),
-            new BlockItem(SCREAMER, new Item.Settings()));
+
+    public static final RegistryHelper<Block> BLOCK_REGISTRY_HELPER = new RegistryHelper<>("fr06-api");
+    public static final RegistryHelper<Item> ITEM_REGISTRY_HELPER = new RegistryHelper<>("fr06-api");
+
+    public static final Block SCREAMER = BLOCK_REGISTRY_HELPER.add(
+            new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK).instrument(ClassTinkerers.getEnum(Instrument.class, "SCREAMER"))),
+            "screamer"
+    );
+
+    public static final Item SCREAMER_ITEM = ITEM_REGISTRY_HELPER.add(new BlockItem(SCREAMER, new Item.Settings()),
+            "screamer");
 
     public static void initTestBlock() {
         FarestsAPI.LOGGER.info("Registering example Block...");
