@@ -2,7 +2,6 @@ package com.farestr06.api.example;
 
 import com.chocohead.mm.api.ClassTinkerers;
 import com.farestr06.api.FarestsAPI;
-import com.farestr06.api.util.RegistryHelper;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -12,18 +11,14 @@ import net.minecraft.item.Item;
 
 public class ExampleBlock {
 
-    public static final RegistryHelper<Block> BLOCK_REGISTRY_HELPER = new RegistryHelper<>("fr06-api");
-    public static final RegistryHelper<Item> ITEM_REGISTRY_HELPER = new RegistryHelper<>("fr06-api");
-
-    public static final Block SCREAMER = BLOCK_REGISTRY_HELPER.add(
-            new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK).instrument(ClassTinkerers.getEnum(Instrument.class, "SCREAMER"))),
-            "screamer"
+    public static final Block SCREAMER = FarestsAPI.HELPER.registerBlock(
+            "screamer", new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK).instrument(ClassTinkerers.getEnum(Instrument.class, "SCREAMER")))
     );
 
-    public static final Item SCREAMER_ITEM = ITEM_REGISTRY_HELPER.add(new BlockItem(SCREAMER, new Item.Settings()),
-            "screamer");
+    public static final Item SCREAMER_ITEM = FarestsAPI.HELPER.registerItem("screamer", new BlockItem(SCREAMER, new Item.Settings())
+    );
 
-    public static void initTestBlock() {
+    public static void register() {
         FarestsAPI.LOGGER.info("Registering example Block...");
     }
 }

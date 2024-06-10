@@ -7,67 +7,62 @@ import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.village.VillagerProfession;
-import net.minecraft.village.VillagerType;
-import org.slf4j.LoggerFactory;
 
-
-/**
- * A registryHelper simplifies the process of registering game objects using generics.
- * @param <T> A game object. See <code>getRegistryFromObject</code> for a list of compatible types.
- * @see RegistryHelper#getRegistryFromObject(Object)
- */
-public class RegistryHelper<T> {
-
-    private final String namespace;
-
+public class RegistryHelper {
+    
+    private final String modId;
+    
     public RegistryHelper(String modId) {
-        this.namespace = modId;
+        this.modId = modId;
+    }
+
+    public SoundEvent registerSound(String path, SoundEvent event) {
+        return Registry.register(Registries.SOUND_EVENT, Identifier.of(modId, path), event);
+    }
+    public Fluid registerFluid(String path, Fluid fluid) {
+        return Registry.register(Registries.FLUID, Identifier.of(modId, path), fluid);
+    }
+    public StatusEffect registerStatusEffects(String path, StatusEffect effect) {
+        return Registry.register(Registries.STATUS_EFFECT, Identifier.of(modId, path), effect);
+    }
+    public Block registerBlock(String path, Block block) {
+        return Registry.register(Registries.BLOCK, Identifier.of(modId, path), block);
     }
 
     /**
-     * Registers an object of the specified type.
-     * @param object An object of the type specified in the type parameter
-     * @param name The path used in the object's holder
-     * @return The passed in object
+     * @deprecated In Minecraft 1.21, Enchantments are data-driven, making manual registration unnecessary. The method has been kept for legacy purposes.
      */
-    public T add(T object, String name) {
-        Registry registry = getRegistryFromObject(object);
-        return (T) Registry.register(registry, Identifier.of(namespace, name), object);
+    @Deprecated
+    public Enchantment registerEnchantment(String path, Enchantment enchantment) {
+        return Registry.register(Registries.ENCHANTMENT, Identifier.of(modId, path), enchantment);
     }
-
-    private Registry getRegistryFromObject(T object) {
-        if (object instanceof Block) {
-            return Registries.BLOCK;
-        } if (object instanceof Item) {
-            return Registries.ITEM;
-        } if (object instanceof Potion) {
-            return Registries.POTION;
-        } if (object instanceof SoundEvent) {
-            return Registries.SOUND_EVENT;
-        } if (object instanceof Fluid) {
-            return Registries.SOUND_EVENT;
-        } if (object instanceof StatusEffect) {
-            return Registries.STATUS_EFFECT;
-        } if (object instanceof EntityType<?>) {
-            return Registries.ENTITY_TYPE;
-        } if (object instanceof Enchantment) {
-            return Registries.ENCHANTMENT;
-        } if (object instanceof PaintingVariant) {
-            return Registries.PAINTING_VARIANT;
-        } if (object instanceof ParticleType<?>) {
-            return Registries.PARTICLE_TYPE;
-        } if (object instanceof VillagerType) {
-            return Registries.VILLAGER_TYPE;
-        } if (object instanceof VillagerProfession) {
-            return Registries.VILLAGER_PROFESSION;
-        }
-        throw new IllegalArgumentException("Object isn't supported");
+    public EntityType<?> registerEntityType(String path, EntityType<?> entityType) {
+        return Registry.register(Registries.ENTITY_TYPE, Identifier.of(modId, path), entityType);
+    }
+    public Item registerItem(String path, Item item) {
+        return Registry.register(Registries.ITEM, Identifier.of(modId, path), item);
+    }
+    public ItemGroup registerItemGroup(String path, ItemGroup group) {
+        return Registry.register(Registries.ITEM_GROUP, Identifier.of(modId, path), group);
+    }
+    public ParticleType<?> registerParticle(String path, ParticleType<?> particleType) {
+        return Registry.register(Registries.PARTICLE_TYPE, Identifier.of(modId, path), particleType);
+    }
+    public Potion registerPotion(String path, Potion potion) {
+        return Registry.register(Registries.POTION, Identifier.of(modId, path), potion);
+    }
+    /**
+     * @deprecated In Minecraft 1.21, PaintingVariants are data-driven, making manual registration unnecessary. The method has been kept for legacy purposes.
+     */
+    @Deprecated
+    public PaintingVariant registerPainting(String path, PaintingVariant paintingVariant) {
+        return Registry.register(Registries.PAINTING_VARIANT, Identifier.of(modId, path), paintingVariant);
     }
 }

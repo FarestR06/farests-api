@@ -15,7 +15,8 @@ public class ExampleSound {
         return Registry.registerReference(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 
-    public static void initTestSound() {
+
+    public static void register() {
         FarestsAPI.LOGGER.info("Registering example SoundEvent...");
     }
 }

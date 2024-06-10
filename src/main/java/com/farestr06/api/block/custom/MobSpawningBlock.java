@@ -15,9 +15,10 @@ import net.minecraft.world.GameRules;
 
 public abstract class MobSpawningBlock extends InfestedBlock {
 
-    private static EntityType entity;
-    public MobSpawningBlock(Block regularBlock, Settings settings, EntityType entityType) {
+    private final EntityType<?> entity;
+    public MobSpawningBlock(Block regularBlock, Settings settings, EntityType<?> entityType) {
         super(regularBlock, settings);
+        this.entity = entityType;
     }
 
     private void spawnMob(ServerWorld world, BlockPos pos) {
