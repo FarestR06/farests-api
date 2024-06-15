@@ -16,12 +16,12 @@ public interface EarlyRiserHelper extends Runnable {
     void run();
 
     /**
-     * Creates an EnumAdder that targets the {@link net.minecraft.block.enums.Instrument Instrument} enum. This adder can be used to add custom Note Block instruments.
-     * @return An enum adder targeting the {@link net.minecraft.block.enums.Instrument Instrument} enum
+     * Creates an EnumAdder that targets the {@link net.minecraft.block.enums.NoteBlockInstrument Instrument} enum. This adder can be used to add custom Note Block instruments.
+     * @return An enum adder targeting the {@link net.minecraft.block.enums.NoteBlockInstrument Instrument} enum
      * @apiNote Use the return value like this: <p><code>addEnum("FOO", () -> new Object[]{"bar", soundEventRegistryEntry, Instrument.Type.BAZ});</code></p>
      * @see EnumAdder
      */
-    default EnumAdder getInstrumentAdder() {
+    default EnumAdder getNoteBlockInstrumentAdder() {
         MappingResolver remapper = FabricLoader.getInstance().getMappingResolver();
         String instrumentMapping = remapper.mapClassName("intermediary", "net.minecraft.class_2766");
         String registryEntry = remapper.mapClassName("intermediary", "net.minecraft.class_6880");

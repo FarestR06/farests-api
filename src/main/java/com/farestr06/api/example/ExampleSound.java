@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 
 public class ExampleSound {
 
-    public static final RegistryEntry<SoundEvent> SCREAMER = registerReference(new Identifier("fr06-api", "block.note_block.screamer"));
+    public static final RegistryEntry<SoundEvent> SCREAMER = registerReference(Identifier.of("fr06-api", "block.note_block.screamer"));
 
     public static RegistryEntry<SoundEvent> registerReference(Identifier id) {
         return Registry.registerReference(Registries.SOUND_EVENT, id, SoundEvent.of(id));
