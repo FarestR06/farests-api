@@ -12,7 +12,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 
-public abstract class MobSpawningBlock extends InfestedBlock {
+public class MobSpawningBlock extends InfestedBlock {
 
     private final EntityType<?> entity;
     public MobSpawningBlock(Block regularBlock, Settings settings, EntityType<?> entityType) {
