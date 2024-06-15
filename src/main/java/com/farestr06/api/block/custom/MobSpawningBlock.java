@@ -4,11 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.InfestedBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.registry.tag.EnchantmentTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
@@ -31,8 +30,12 @@ public abstract class MobSpawningBlock extends InfestedBlock {
 
     @Override
     public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack tool, boolean dropExperience) {
-        if (world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS) && (EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, tool) == 0 || !tool.isOf(Items.SHEARS))) {
+        if (canSpawn(state, world, pos, tool)) {
             this.spawnMob(world, pos);
         }
+    }
+
+    public boolean canSpawn(BlockState state, ServerWorld world, BlockPos pos, ItemStack tool) {
+        return world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS) && !EnchantmentHelper.hasAnyEnchantmentsIn(tool, EnchantmentTags.PREVENTS_INFESTED_SPAWNS);
     }
 }
