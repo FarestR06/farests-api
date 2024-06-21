@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "fr06-api",
-	"version": "2.0.1",
+	"version": "2.1.0",
 	"name": "Farest's API",
 	"description": "Various utilities",
 	"authors": [
@@ -17,9 +17,6 @@
 	"entrypoints": {
 		"main": [
 			"com.farestr06.api.FarestsAPI"
-		],
-		"mm:early_risers": [
-			"com.farestr06.api.example.FarestsAPIExampleEarlyRisers"
 		]
 	},
 	"mixins": [
