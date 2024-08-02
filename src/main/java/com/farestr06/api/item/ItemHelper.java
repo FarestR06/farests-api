@@ -15,7 +15,7 @@ public interface ItemHelper {
             throw new ItemRegistryFailure(location, e);
         }
     }
-g
+    
     static Item makeItem(Identifier location, Item.Settings properties) {
         try {
             return Registry.register(Registries.ITEM, location, new Item(properties));
