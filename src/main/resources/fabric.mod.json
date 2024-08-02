@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "fr06-api",
-	"version": "${version}",
+	"version": "1.4.2",
 	"name": "Farest's API",
 	"description": "Various utilities",
 	"authors": [
@@ -20,9 +20,6 @@
 		],
 		"fabric-datagen": [
 			"com.farestr06.api.FarestsAPIDataGenerator"
-		],
-		"mm:early_risers": [
-			"com.farestr06.api.example.FarestsAPIExampleEarlyRisers"
 		]
 	},
 	"mixins": [
@@ -31,9 +28,9 @@
 	"accessWidener": "fr06-api.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.15.11",
-		"minecraft": "~1.20.6",
+		"minecraft": "1.21",
 		"java": ">=21",
-		"fabric-api": "*"
+		"fabric-api": ">=0.100.7+1.21"
 	},
 	"suggests": {
 		"another-mod": "*"
