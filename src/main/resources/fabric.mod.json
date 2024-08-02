@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "fr06-api",
-	"version": "1.4.2",
+	"version": "2.2.0",
 	"name": "Farest's API",
 	"description": "Various utilities",
 	"authors": [
@@ -17,9 +17,6 @@
 	"entrypoints": {
 		"main": [
 			"com.farestr06.api.FarestsAPI"
-		],
-		"fabric-datagen": [
-			"com.farestr06.api.FarestsAPIDataGenerator"
 		]
 	},
 	"mixins": [
