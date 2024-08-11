@@ -6,9 +6,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-public interface ItemHelper {
+public final class ItemHelper {
 
-    static Item makeSimpleItem(Identifier location) {
+    public static Item makeSimpleItem(Identifier location) {
         try {
             return Registry.register(Registries.ITEM, location, new Item(new Item.Settings()));
         } catch (Exception e) {
@@ -16,7 +16,7 @@ public interface ItemHelper {
         }
     }
     
-    static Item makeItem(Identifier location, Item.Settings properties) {
+    public static Item makeItem(Identifier location, Item.Settings properties) {
         try {
             return Registry.register(Registries.ITEM, location, new Item(properties));
         } catch (Exception e) {
@@ -24,7 +24,7 @@ public interface ItemHelper {
         }
     }
 
-    static Item makeAdvancedItem(Identifier location, Item advancedItem) {
+    public static Item makeAdvancedItem(Identifier location, Item advancedItem) {
         try {
             return Registry.register(Registries.ITEM, location, advancedItem);
         } catch (Exception e) {

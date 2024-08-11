@@ -9,9 +9,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
-public interface BlockHelper {
-
-    static Block makeBlock(Identifier location, AbstractBlock.Settings properties) {
+public final class BlockHelper {
+    
+    public static Block makeBlock(Identifier location, AbstractBlock.Settings properties) {
         
         try {
             return Registry.register(Registries.BLOCK, location, new Block(properties));
@@ -20,11 +20,11 @@ public interface BlockHelper {
         }
     }
 
-    static Block makeBlockAndItem(Identifier location, AbstractBlock.Settings properties) {
+    public static Block makeBlockAndItem(Identifier location, AbstractBlock.Settings properties) {
         return makeBlockAndItem(location, properties, new Item.Settings());
     }
 
-    static Block makeBlockAndItem(Identifier location, AbstractBlock.Settings blockProperties, Item.Settings itemProperties) {
+    public static Block makeBlockAndItem(Identifier location, AbstractBlock.Settings blockProperties, Item.Settings itemProperties) {
 
         try {
             Block block = makeBlock(location, blockProperties);
@@ -35,7 +35,7 @@ public interface BlockHelper {
         }
     }
 
-    static Block makeAdvancedBlock(Identifier location, Block advancedBlock) {
+    public static Block makeAdvancedBlock(Identifier location, Block advancedBlock) {
 
         try {
             return Registry.register(Registries.BLOCK, location, advancedBlock);
@@ -44,11 +44,11 @@ public interface BlockHelper {
         }
     }
 
-    static Block makeAdvancedBlockAndItem(Identifier location, Block advancedBlock) {
+    public static Block makeAdvancedBlockAndItem(Identifier location, Block advancedBlock) {
         return makeAdvancedBlockAndItem(location, advancedBlock, new Item.Settings());
     }
 
-    static Block makeAdvancedBlockAndItem(Identifier location, Block advancedBlock, Item.Settings itemProperties) {
+    public static Block makeAdvancedBlockAndItem(Identifier location, Block advancedBlock, Item.Settings itemProperties) {
 
         try {
             makeBlockItem(location, advancedBlock, itemProperties);
@@ -58,11 +58,11 @@ public interface BlockHelper {
         }
     }
 
-    static Item makeBlockItem(Identifier location, Block block) {
+    public static Item makeBlockItem(Identifier location, Block block) {
         return makeBlockItem(location, block, new Item.Settings());
     }
 
-    static Item makeBlockItem(Identifier location, Block block, Item.Settings properties) {
+    public static Item makeBlockItem(Identifier location, Block block, Item.Settings properties) {
         
         try {
             Item blockItem = new BlockItem(block, properties);
