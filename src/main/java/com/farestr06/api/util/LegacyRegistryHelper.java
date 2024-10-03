@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 
 
-@ApiStatus.Obsolete
+@Deprecated(forRemoval = true, since = "2.4.0-1.21.1")
 public class LegacyRegistryHelper {
     
     private final String modId;
