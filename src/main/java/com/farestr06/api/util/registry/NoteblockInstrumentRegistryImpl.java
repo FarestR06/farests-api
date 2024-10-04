@@ -43,8 +43,7 @@ public class NoteblockInstrumentRegistryImpl implements NoteblockInstrumentRegis
     @Nullable
     @Override
     public RegistryEntry.Reference<SoundEvent> get(Block block) {
-        RegistryEntry.Reference<SoundEvent> event = getEntryMap().get(block);
-        return event;
+        return getEntryMap().get(block);
     }
 
     @Override
