@@ -16,9 +16,9 @@ public final class ItemHelper {
         }
     }
     
-    public static Item makeItem(Identifier location, Item.Settings properties) {
+    public static Item makeItem(Identifier location, Item.Settings settings) {
         try {
-            return Registry.register(Registries.ITEM, location, new Item(properties));
+            return Registry.register(Registries.ITEM, location, new Item(settings));
         } catch (Exception e) {
             throw new ItemRegistryFailure(location, e);
         }

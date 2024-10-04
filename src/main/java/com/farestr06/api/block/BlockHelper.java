@@ -11,24 +11,24 @@ import net.minecraft.util.Identifier;
 
 public final class BlockHelper {
     
-    public static Block makeBlock(Identifier location, AbstractBlock.Settings properties) {
+    public static Block makeBlock(Identifier location, AbstractBlock.Settings settings) {
         
         try {
-            return Registry.register(Registries.BLOCK, location, new Block(properties));
+            return Registry.register(Registries.BLOCK, location, new Block(settings));
         } catch (Exception e) {
             throw new BlockRegistryFailure(location, e);
         }
     }
 
-    public static Block makeBlockAndItem(Identifier location, AbstractBlock.Settings properties) {
-        return makeBlockAndItem(location, properties, new Item.Settings());
+    public static Block makeBlockAndItem(Identifier location, AbstractBlock.Settings settings) {
+        return makeBlockAndItem(location, settings, new Item.Settings());
     }
 
-    public static Block makeBlockAndItem(Identifier location, AbstractBlock.Settings blockProperties, Item.Settings itemProperties) {
+    public static Block makeBlockAndItem(Identifier location, AbstractBlock.Settings blockSettings, Item.Settings itemSettings) {
 
         try {
-            Block block = makeBlock(location, blockProperties);
-            makeBlockItem(location, block, itemProperties);
+            Block block = makeBlock(location, blockSettings);
+            makeBlockItem(location, block, itemSettings);
             return block;
         } catch (Exception e) {
             throw new BlockRegistryFailure(location, e);

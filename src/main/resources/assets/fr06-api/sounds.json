@@ -1,8 +1,8 @@
 {
-  "block.note_block.screamer": {
+  "block.note_block.bonk": {
     "sounds": [
       {
-        "name": "fr06-api:test",
+        "name": "fr06-api:bonk",
         "volume": 0.5
       }
     ]
