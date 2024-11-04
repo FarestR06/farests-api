@@ -50,10 +50,6 @@ def includeMod(String dep) {
 	dependencies.include(dep)
 }
 
-loom {
-	accessWidenerPath = file("src/main/resources/fr06-api.accesswidener")
-}
-
 processResources {
 	inputs.property "version", project.version
 

@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
  * A class of blank advancements that represent a vanilla advancement; they have no purpose except to hold resource locations.
  * @apiNote These advancement entries are meant to be passed in as a parent and should not be registered themselves.
  */
-public class VanillaAdvancements {
+public final class VanillaAdvancements {
     public static final class Story {
         /**
          * Minecraft - The heart and story of the game
@@ -83,7 +83,7 @@ public class VanillaAdvancements {
     
     public static final class Adventure {
         public static final AdvancementEntry ROOT = advancement("adventure/root");
-        public static final AdvancementEntry KILL_RAID_CAPTAIN_FOR_BAD_OMEN = advancement("adventure/voluntary_exile");
+        public static final AdvancementEntry KILL_RAID_CAPTAIN = advancement("adventure/voluntary_exile");
         public static final AdvancementEntry SPYGLASS_AT_PARROT = advancement("adventure/spyglass_at_parrot");
         public static final AdvancementEntry KILL_A_MOB = advancement("adventure/kill_a_mob");
         public static final AdvancementEntry READ_POWER_OF_CHISELED_BOOKSHELF = advancement("adventure/read_power_of_chiseled_bookshelf");
@@ -131,7 +131,7 @@ public class VanillaAdvancements {
     
     //TODO Add "Husbandry" inner class
 
-    protected static AdvancementEntry advancement(String path) {
+    private static AdvancementEntry advancement(String path) {
         return Advancement.Builder.createUntelemetered().criterion("missingno", Criteria.IMPOSSIBLE.create(new ImpossibleCriterion.Conditions())).build(Identifier.of("minecraft", path));
     }
 }

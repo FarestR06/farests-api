@@ -1,6 +1,5 @@
 package com.farestr06.api.block;
 
-import com.farestr06.api.util.exception.BlockRegistryFailure;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -12,12 +11,7 @@ import net.minecraft.util.Identifier;
 public final class BlockHelper {
     
     public static Block makeBlock(Identifier location, AbstractBlock.Settings settings) {
-        
-        try {
-            return Registry.register(Registries.BLOCK, location, new Block(settings));
-        } catch (Exception e) {
-            throw new BlockRegistryFailure(location, e);
-        }
+        return Registry.register(Registries.BLOCK, location, new Block(settings));
     }
 
     public static Block makeBlockAndItem(Identifier location, AbstractBlock.Settings settings) {
@@ -25,23 +19,13 @@ public final class BlockHelper {
     }
 
     public static Block makeBlockAndItem(Identifier location, AbstractBlock.Settings blockSettings, Item.Settings itemSettings) {
-
-        try {
-            Block block = makeBlock(location, blockSettings);
-            makeBlockItem(location, block, itemSettings);
-            return block;
-        } catch (Exception e) {
-            throw new BlockRegistryFailure(location, e);
-        }
+        Block block = makeBlock(location, blockSettings);
+        makeBlockItem(location, block, itemSettings);
+        return block;
     }
 
     public static Block makeAdvancedBlock(Identifier location, Block advancedBlock) {
-
-        try {
-            return Registry.register(Registries.BLOCK, location, advancedBlock);
-        } catch (Exception e) {
-            throw new BlockRegistryFailure(location, e);
-        }
+        return Registry.register(Registries.BLOCK, location, advancedBlock);
     }
 
     public static Block makeAdvancedBlockAndItem(Identifier location, Block advancedBlock) {
@@ -49,13 +33,8 @@ public final class BlockHelper {
     }
 
     public static Block makeAdvancedBlockAndItem(Identifier location, Block advancedBlock, Item.Settings itemProperties) {
-
-        try {
-            makeBlockItem(location, advancedBlock, itemProperties);
-            return makeAdvancedBlock(location, advancedBlock);
-        } catch (Exception e) {
-            throw new BlockRegistryFailure(location, e);
-        }
+        makeBlockItem(location, advancedBlock, itemProperties);
+        return makeAdvancedBlock(location, advancedBlock);
     }
 
     public static Item makeBlockItem(Identifier location, Block block) {
@@ -63,12 +42,7 @@ public final class BlockHelper {
     }
 
     public static Item makeBlockItem(Identifier location, Block block, Item.Settings properties) {
-        
-        try {
             Item blockItem = new BlockItem(block, properties);
             return Registry.register(Registries.ITEM, location, blockItem);
-        } catch (Exception e) {
-            throw new BlockRegistryFailure(location, e);
-        }
     }
 }
