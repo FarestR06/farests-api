@@ -3,6 +3,8 @@
   "package": "com.farestr06.api.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ItemEntityMixin",
+    "ItemModelGeneratorMixin",
     "ItemSettingsMixin",
     "NoteBlockMixin"
   ],
