@@ -9,4 +9,5 @@ public interface FarestsItemSettings {
     Item.Settings lore(Text... texts);
     Item.Settings stack1();
     Item.Settings stack16();
+    Item.Settings copy(Item item);
 }
