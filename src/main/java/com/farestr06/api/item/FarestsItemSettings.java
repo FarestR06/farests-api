@@ -19,4 +19,8 @@ public interface FarestsItemSettings {
     default Item.Settings stack16() {
         throw new UnsupportedOperationException("Method should be called from Item.Settings!");
     }
+
+    default Item.Settings copy(Item item) {
+        throw new UnsupportedOperationException("Method should be called from Item.Settings!");
+    }
 }
