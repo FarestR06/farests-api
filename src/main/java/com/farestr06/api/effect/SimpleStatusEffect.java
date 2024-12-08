@@ -5,7 +5,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.particle.ParticleEffect;
 
 /**
- * This class contains easy access to constructors for a bare-bones status effect, usually to modify player attributes.
+ * This class contains easy access to constructors for a bare-bones status effect, usually to modify entity attributes.
  * @apiNote The class is exclusively for basic effects, and cannot be extended. If you want to make a more advanced status effect, consider extending the vanilla {@link StatusEffect}.
  * @since 2.5.0
  * @author Jacob D. (FarestR06)

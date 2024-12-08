@@ -15,6 +15,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 
+/**
+ * An extension of {@link InfestedBlock} that can summon any mob, rather than just Silverfish.
+ */
 public class MobSpawningBlock extends InfestedBlock {
 
     public static final MapCodec<MobSpawningBlock> CODEC = RecordCodecBuilder.mapCodec(

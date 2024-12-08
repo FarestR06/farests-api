@@ -4,9 +4,19 @@ import net.minecraft.item.Item;
 import net.minecraft.text.Text;
 
 public interface FarestsItemSettings {
-    Item.Settings explosionProof();
-    Item.Settings glint();
-    Item.Settings lore(Text... texts);
-    Item.Settings stack1();
-    Item.Settings stack16();
+    default Item.Settings explosionProof() {
+        throw new UnsupportedOperationException("Method should be called from Item.Settings!");
+    }
+    default Item.Settings glint() {
+        throw new UnsupportedOperationException("Method should be called from Item.Settings!");
+    }
+    default Item.Settings lore(Text... texts) {
+        throw new UnsupportedOperationException("Method should be called from Item.Settings!");
+    }
+    default Item.Settings stack1() {
+        throw new UnsupportedOperationException("Method should be called from Item.Settings!");
+    }
+    default Item.Settings stack16() {
+        throw new UnsupportedOperationException("Method should be called from Item.Settings!");
+    }
 }
