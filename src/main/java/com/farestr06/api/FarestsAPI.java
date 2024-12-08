@@ -48,7 +48,7 @@ public class FarestsAPI implements ModInitializer {
 		}
 
 		DefaultItemComponentEvents.MODIFY.register(context -> context.modify(
-				Items.NETHER_STAR, builder -> builder.add(FarestsDataComponents.EXPLOSION_PROOF, Unit.INSTANCE))
+				Items.NETHER_STAR, builder -> builder.add(FarestsDataComponents.EXPLOSION_RESISTANT, Unit.INSTANCE))
 		);
 	}
 }

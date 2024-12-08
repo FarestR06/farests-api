@@ -1,8 +1,8 @@
 # Farest's API!
+[![Static Badge](https://img.shields.io/badge/farests--api-%2300AF5C?logo=modrinth&label=modrinth)](https://modrinth.com/mod/farests-api)
 ## Features
-### RegistryHelper
-A class filled with methods to quickly register game objects.
-#### Usage
-Just create a static RegistryHelper field in your ModInitializer! Once you've done that, you can simply reference it throughout your project!
-### EarlyRiserHelper (Requires Manningham Mills)
-An interface that contains methods to help you add stuff to Enums.
+* Custom Note Block Instruments
+* Registry helper classes
+* Item Setting shorthand
+* Easy access to certain constructors and objects
+* And there's more to come!

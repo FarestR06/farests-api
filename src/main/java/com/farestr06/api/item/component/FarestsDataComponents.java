@@ -12,7 +12,7 @@ import java.util.function.UnaryOperator;
 import static com.farestr06.api.FarestsAPI.MOD_ID;
 
 public class FarestsDataComponents {
-    public static final ComponentType<Unit> EXPLOSION_PROOF = register(
+    public static final ComponentType<Unit> EXPLOSION_RESISTANT = register(
             "explosion_proof",
             builder -> builder.codec(Unit.CODEC).packetCodec(PacketCodec.unit(Unit.INSTANCE))
     );

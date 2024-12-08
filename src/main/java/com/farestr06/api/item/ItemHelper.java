@@ -7,15 +7,15 @@ import net.minecraft.util.Identifier;
 
 public final class ItemHelper {
 
-    public static Item makeSimpleItem(Identifier location) {
-        return makeItem(location, new Item.Settings());
+    public static Item makeSimpleItem(Identifier id) {
+        return makeItem(id, new Item.Settings());
     }
     
-    public static Item makeItem(Identifier location, Item.Settings settings) {
-        return makeAdvancedItem(location, new Item(settings));
+    public static Item makeItem(Identifier id, Item.Settings settings) {
+        return makeAdvancedItem(id, new Item(settings));
     }
 
-    public static Item makeAdvancedItem(Identifier location, Item advancedItem) {
-        return Registry.register(Registries.ITEM, location, advancedItem);
+    public static Item makeAdvancedItem(Identifier id, Item advancedItem) {
+        return Registry.register(Registries.ITEM, id, advancedItem);
     }
 }
