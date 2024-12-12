@@ -8,13 +8,13 @@ import net.minecraft.util.Identifier;
 
 public final class SoundHelper {
     public static SoundEvent makeEvent(Identifier id) {
-        return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+        return makeEvent(id, id);
 
     }public static SoundEvent makeEvent(Identifier registryId, Identifier soundId) {
         return Registry.register(Registries.SOUND_EVENT, registryId, SoundEvent.of(soundId));
     }
     public static RegistryEntry.Reference<SoundEvent> makeReferenceEvent(Identifier id) {
-        return Registry.registerReference(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+        return makeReferenceEvent(id, id);
     }
     public static RegistryEntry.Reference<SoundEvent> makeReferenceEvent(Identifier registryId, Identifier soundId) {
         return Registry.registerReference(Registries.SOUND_EVENT, registryId, SoundEvent.of(soundId));

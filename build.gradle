@@ -1,14 +1,5 @@
-
-buildscript {
-	repositories {
-		maven {
-			name = 'Jitpack'
-			url = "https://jitpack.io"
-		}
-	}
-}
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.9-SNAPSHOT'
 	id 'maven-publish'
 }
 apply plugin: 'java'
@@ -93,7 +84,7 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 		mavenCentral()
-		maven { url "https://jitpack.io" }	}
+	}
 }
 
 wrapper {

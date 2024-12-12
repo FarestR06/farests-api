@@ -12,6 +12,10 @@ import java.util.function.UnaryOperator;
 import static com.farestr06.api.FarestsAPI.MOD_ID;
 
 public class FarestsDataComponents {
+    /**
+     * @deprecated A vanilla data component called <code>minecraft:damage_resistant</code> has been added, replacing the one data component in this class.
+     */
+    @Deprecated(forRemoval = true)
     public static final ComponentType<Unit> EXPLOSION_RESISTANT = register(
             "explosion_proof",
             builder -> builder.codec(Unit.CODEC).packetCodec(PacketCodec.unit(Unit.INSTANCE))

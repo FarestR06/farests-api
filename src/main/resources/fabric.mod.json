@@ -33,7 +33,7 @@
 	},
 	"custom": {
 		"loom:injected_interfaces": {
-			"net/minecraft/class_1792/class_1793": ["com/farestr06/api/item/FarestsItemSettings"]
+			"net/minecraft/class_1792$class_1793": ["com/farestr06/api/item/FarestsItemSettings"]
 		}
 	}
 }

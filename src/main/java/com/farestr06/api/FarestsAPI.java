@@ -1,19 +1,14 @@
 package com.farestr06.api;
 
-import com.farestr06.api.item.component.FarestsDataComponents;
 import com.farestr06.api.util.registry.NoteblockInstrumentRegistry;
 import net.fabricmc.api.ModInitializer;
-
-import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Unit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,9 +41,5 @@ public class FarestsAPI implements ModInitializer {
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			NoteblockInstrumentRegistry.INSTANCE.add(Blocks.BAMBOO_MOSAIC, BONK_EVENT);
 		}
-
-		DefaultItemComponentEvents.MODIFY.register(context -> context.modify(
-				Items.NETHER_STAR, builder -> builder.add(FarestsDataComponents.EXPLOSION_RESISTANT, Unit.INSTANCE))
-		);
 	}
 }

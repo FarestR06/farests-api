@@ -8,6 +8,7 @@ import net.minecraft.block.InfestedBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.EnchantmentTags;
@@ -50,7 +51,7 @@ public class MobSpawningBlock extends InfestedBlock {
     }
 
     protected void spawnMob(ServerWorld world, BlockPos pos) {
-        Entity mob = entity.create(world);
+        Entity mob = entity.create(world, SpawnReason.TRIGGERED);
         if (mob != null) {
             mob.refreshPositionAndAngles((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5, 0.0f, 0.0f);
             world.spawnEntity(mob);

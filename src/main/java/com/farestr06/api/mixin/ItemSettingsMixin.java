@@ -1,14 +1,12 @@
 package com.farestr06.api.mixin;
 
 import com.farestr06.api.item.FarestsItemSettings;
-import com.farestr06.api.item.component.FarestsDataComponents;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.LoreComponent;
 import net.minecraft.item.Item;
 import net.minecraft.text.Text;
-import net.minecraft.util.Unit;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -20,11 +18,6 @@ public abstract class ItemSettingsMixin implements FarestsItemSettings {
     @Shadow public abstract <T> Item.Settings component(ComponentType<T> type, T value);
 
     @Shadow public abstract Item.Settings maxCount(int maxCount);
-
-    @Override
-    public Item.Settings explosionProof() {
-        return component(FarestsDataComponents.EXPLOSION_RESISTANT, Unit.INSTANCE);
-    }
 
     @Override
     public Item.Settings glint() {
@@ -59,11 +52,8 @@ public abstract class ItemSettingsMixin implements FarestsItemSettings {
         if (components.contains(DataComponentTypes.MAX_DAMAGE)) {
             settings.maxDamage(components.get(DataComponentTypes.MAX_DAMAGE));
         }
-        if (components.contains(DataComponentTypes.FIRE_RESISTANT)) {
-            settings.fireproof();
-        }
-        if (components.contains(FarestsDataComponents.EXPLOSION_RESISTANT)) {
-            settings.fireproof();
+        if (components.contains(DataComponentTypes.DAMAGE_RESISTANT)) {
+            settings.component(DataComponentTypes.DAMAGE_RESISTANT, components.get(DataComponentTypes.DAMAGE_RESISTANT));
         }
         if (components.contains(DataComponentTypes.FOOD)) {
             settings.food(components.get(DataComponentTypes.FOOD));
