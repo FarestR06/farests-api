@@ -6,12 +6,14 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 public final class BlockHelper {
     
     public static Block makeBlock(Identifier id, AbstractBlock.Settings settings) {
-        return Registry.register(Registries.BLOCK, id, new Block(settings));
+        return Registry.register(Registries.BLOCK, id, new Block(settings.registryKey(RegistryKey.of(RegistryKeys.BLOCK, id))));
     }
 
     public static Block makeBlockAndItem(Identifier id, AbstractBlock.Settings settings) {
@@ -32,8 +34,8 @@ public final class BlockHelper {
         return makeAdvancedBlockAndItem(id, advancedBlock, new Item.Settings());
     }
 
-    public static Block makeAdvancedBlockAndItem(Identifier id, Block advancedBlock, Item.Settings itemProperties) {
-        makeBlockItem(id, advancedBlock, itemProperties);
+    public static Block makeAdvancedBlockAndItem(Identifier id, Block advancedBlock, Item.Settings settings) {
+        makeBlockItem(id, advancedBlock, settings);
         return makeAdvancedBlock(id, advancedBlock);
     }
 
@@ -41,8 +43,8 @@ public final class BlockHelper {
         return makeBlockItem(id, block, new Item.Settings());
     }
 
-    public static Item makeBlockItem(Identifier id, Block block, Item.Settings properties) {
-            Item blockItem = new BlockItem(block, properties);
+    public static Item makeBlockItem(Identifier id, Block block, Item.Settings settings) {
+            Item blockItem = new BlockItem(block, settings.registryKey(RegistryKey.of(RegistryKeys.ITEM, id)));
             return Registry.register(Registries.ITEM, id, blockItem);
     }
 }

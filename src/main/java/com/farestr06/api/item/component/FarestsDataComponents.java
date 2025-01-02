@@ -6,11 +6,13 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Unit;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.function.UnaryOperator;
 
 import static com.farestr06.api.FarestsAPI.MOD_ID;
 
+@ApiStatus.Obsolete
 public class FarestsDataComponents {
     /**
      * @deprecated A vanilla data component called <code>minecraft:damage_resistant</code> has been added, replacing the one data component in this class.
