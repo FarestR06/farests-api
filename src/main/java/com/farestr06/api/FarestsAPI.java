@@ -1,8 +1,10 @@
 package com.farestr06.api;
 
+import com.farestr06.api.block.BlockHelper;
 import com.farestr06.api.util.registry.NoteblockInstrumentRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -40,6 +42,8 @@ public class FarestsAPI implements ModInitializer {
 
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			NoteblockInstrumentRegistry.INSTANCE.add(Blocks.BAMBOO_MOSAIC, BONK_EVENT);
+
+			BlockHelper.makeSimpleBlockAndSimpleItem(Identifier.of("fr06-api", "funky_lol"), AbstractBlock.Settings.copy(Blocks.CRYING_OBSIDIAN));
 		}
 	}
 }

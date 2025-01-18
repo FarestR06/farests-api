@@ -71,9 +71,9 @@ public final class BlockHelper {
      * the necessary keys automatically.
      */
     public static Block registerWithSimpleItem(RegistryKey<Block> key, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
-        Block block = factory.apply(settings.registryKey(key));
+        Block block = Registry.register(Registries.BLOCK, key, factory.apply(settings.registryKey(key)));;
         ItemHelper.makeSimpleBlockItem(block);
-        return Registry.register(Registries.BLOCK, key, block);
+        return block;
     }
 
     /**
@@ -108,9 +108,9 @@ public final class BlockHelper {
      * the necessary keys automatically.
      */
     public static Block registerWithItem(RegistryKey<Block> key, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings blockSettings, Item.Settings itemSettings) {
-        Block block = factory.apply(blockSettings.registryKey(key));
+        Block block = Registry.register(Registries.BLOCK, key, factory.apply(blockSettings.registryKey(key)));
         ItemHelper.makeBlockItem(block, itemSettings);
-        return Registry.register(Registries.BLOCK, key, block);
+        return block;
     }
 
     /**
@@ -152,9 +152,9 @@ public final class BlockHelper {
             AbstractBlock.Settings blockSettings, BiFunction<Block, Item.Settings, Item> itemFactory,
             Item.Settings itemSettings
     ) {
-        Block block = blockFactory.apply(blockSettings.registryKey(key));
+        Block block = Registry.register(Registries.BLOCK, key, blockFactory.apply(blockSettings.registryKey(key)));
         ItemHelper.makeAdvancedBlockItem(block, itemFactory, itemSettings);
-        return Registry.register(Registries.BLOCK, key, block);
+        return block;
     }
 
     /**

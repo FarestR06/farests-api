@@ -391,14 +391,13 @@ public final class VanillaAdvancements {
         /**
          * Blowback - Kill a Breeze with a deflected Breeze-shot Wind Charge
          */
-        public static final AdvancementEntry KILL_BREEZE_WITH_PARRIED_WIND_CHARGE = advancement("adventure/blowback");
+        public static final AdvancementEntry KILL_BREEZE_WITH_WIND_CHARGE = advancement("adventure/blowback");
         /**
          * Over-Overkill - Deal 50 hearts of damage in a single hit using the Mace
          */
         public static final AdvancementEntry DEAL_ONE_HUNDRED_DAMAGE_WITH_MACE = advancement("adventure/overoverkill");
     }
 
-    //TODO Add "Husbandry" inner class
     public static final class Husbandry {
         /**
          * Husbandry - The world is full of friends and food
