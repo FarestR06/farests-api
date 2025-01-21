@@ -3,7 +3,7 @@
 	"id": "fr06-api",
 	"version": "3.1.1+1.21.4",
 	"name": "Farest's API",
-	"description": "Various utilities",
+	"description": "Various utilities for FarestR06's mods",
 	"authors": [
 		"FarestR06"
 	],
@@ -30,5 +30,10 @@
 	},
 	"suggests": {
 		"another-mod": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"badges": ["library"]
+		}
 	}
 }
