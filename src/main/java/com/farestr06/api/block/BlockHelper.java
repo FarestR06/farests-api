@@ -76,6 +76,12 @@ public final class BlockHelper {
         return block;
     }
 
+    public static Block registerWithSimpleAliasedItem(RegistryKey<Block> key, Identifier itemId, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
+        Block block = Registry.register(Registries.BLOCK, key, factory.apply(settings.registryKey(key)));;
+        ItemHelper.makeSimpleAliasedBlockItem(block, itemId);
+        return block;
+    }
+
     /**
      * Makes a block and a corresponding item with default properties/settings.
      * @param id The block's and item's resource location/identifier
@@ -87,6 +93,10 @@ public final class BlockHelper {
         return registerWithSimpleItem(keyOf(id), factory, settings);
     }
 
+    public static Block makeBlockAndSimpleAliasedItem(Identifier blockId, Identifier itemId, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
+        return registerWithSimpleAliasedItem(keyOf(blockId), itemId, factory, settings);
+    }
+
     /**
      * Makes a basic block and a corresponding item with default properties/settings.
      * @param id The block's and item's resource location/identifier
@@ -95,6 +105,10 @@ public final class BlockHelper {
      */
     public static Block makeSimpleBlockAndSimpleItem(Identifier id, AbstractBlock.Settings settings) {
         return makeBlockAndSimpleItem(id, Block::new, settings);
+    }
+
+    public static Block makeSimpleBlockAndSimpleAliasedItem(Identifier blockId, Identifier itemId, AbstractBlock.Settings settings) {
+        return makeBlockAndSimpleAliasedItem(blockId, itemId, Block::new, settings);
     }
 
     /**
@@ -112,6 +126,21 @@ public final class BlockHelper {
         ItemHelper.makeBlockItem(block, itemSettings);
         return block;
     }
+    /**
+     * Makes a block and a corresponding item with custom properties/settings.
+     * @param key The resource/registry key, which is used to help with item names, models and loot
+     * @param factory The function used to create the block
+     * @param blockSettings The properties/settings to be applied to the block
+     * @param itemSettings The properties/settings to be applied to the item
+     * @return The registered block
+     * @apiNote This method requires a resource/registry key. Ideally, you should use the other methods, which create
+     * the necessary keys automatically.
+     */
+    public static Block registerWithAliasedItem(RegistryKey<Block> key, Identifier itemId, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings blockSettings, Item.Settings itemSettings) {
+        Block block = Registry.register(Registries.BLOCK, key, factory.apply(blockSettings.registryKey(key)));
+        ItemHelper.makeAliasedBlockItem(block, itemId, itemSettings);
+        return block;
+    }
 
     /**
      * Makes a block and a corresponding item with custom properties/settings.
@@ -123,6 +152,10 @@ public final class BlockHelper {
      */
     public static Block makeBlockAndItem(Identifier id, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings blockSettings, Item.Settings itemSettings) {
         return registerWithItem(keyOf(id), factory, blockSettings, itemSettings);
+    }
+
+    public static Block makeBlockAndAliasedItem(Identifier blockId, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings blockSettings, Item.Settings itemSettings) {
+        return registerWithItem(keyOf(blockId), factory, blockSettings, itemSettings);
     }
 
     /**
@@ -156,6 +189,15 @@ public final class BlockHelper {
         ItemHelper.makeAdvancedBlockItem(block, itemFactory, itemSettings);
         return block;
     }
+    public static Block registerWithAdvancedAliasedItem(
+            RegistryKey<Block> key, Identifier itemId, Function<AbstractBlock.Settings, Block> blockFactory,
+            AbstractBlock.Settings blockSettings, BiFunction<Block, Item.Settings, Item> itemFactory,
+            Item.Settings itemSettings
+    ) {
+        Block block = Registry.register(Registries.BLOCK, key, blockFactory.apply(blockSettings.registryKey(key)));
+        ItemHelper.makeAdvancedAliasedBlockItem(block, itemId, itemFactory, itemSettings);
+        return block;
+    }
 
     /**
      * Makes a block and an advanced corresponding item with custom properties/settings.
@@ -174,6 +216,14 @@ public final class BlockHelper {
         return registerWithAdvancedItem(keyOf(id), blockFactory, blockSettings, itemFactory, itemSettings);
     }
 
+    public static Block makeBlockAndAdvancedAliasedItem(
+            Identifier blockId, Identifier itemId, Function<AbstractBlock.Settings, Block> blockFactory,
+            AbstractBlock.Settings blockSettings, BiFunction<Block, Item.Settings, Item> itemFactory,
+            Item.Settings itemSettings
+    ) {
+        return registerWithAdvancedAliasedItem(keyOf(blockId), itemId, blockFactory, blockSettings, itemFactory, itemSettings);
+    }
+
     /**
      * Makes a basic block and an advanced corresponding item with custom properties/settings.
      * @param id The block's and item's resource location/identifier
@@ -187,6 +237,13 @@ public final class BlockHelper {
             BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings
     ) {
         return makeBlockAndAdvancedItem(id, Block::new, blockSettings, factory, settings);
+    }
+
+    public static Block makeSimpleBlockAndAdvancedAliasedItem(
+            Identifier blockId, Identifier itemId, AbstractBlock.Settings blockSettings,
+            BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings
+    ) {
+        return makeBlockAndAdvancedAliasedItem(blockId, itemId, Block::new, blockSettings, factory, settings);
     }
 
     /**
@@ -203,6 +260,14 @@ public final class BlockHelper {
     ) {
         return registerWithAdvancedItem(keyOf(id), blockFactory, settings, itemFactory, new Item.Settings());
     }
+    public static Block makeBlockAndAdvancedAliasedItemWithDefaultSettings(
+            Identifier blockId, Identifier itemId, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings,
+            BiFunction<Block, Item.Settings, Item> itemFactory
+    ) {
+        return registerWithAdvancedAliasedItem(
+                keyOf(blockId), itemId, blockFactory, settings, itemFactory, new Item.Settings()
+        );
+    }
 
     /**
      * Makes a basic block and an advanced corresponding item with default properties/settings.
@@ -215,6 +280,12 @@ public final class BlockHelper {
             Identifier id, AbstractBlock.Settings settings, BiFunction<Block, Item.Settings, Item> factory
     ) {
         return makeBlockAndAdvancedItemWithDefaultSettings(id, Block::new, settings, factory);
+    }
+
+    public static Block makeSimpleBlockAndAdvancedAliasedItemWithDefaultSettings(
+            Identifier blockId, Identifier itemId, AbstractBlock.Settings settings, BiFunction<Block, Item.Settings, Item> factory
+    ) {
+        return makeBlockAndAdvancedAliasedItemWithDefaultSettings(blockId, itemId, Block::new, settings, factory);
     }
 
 

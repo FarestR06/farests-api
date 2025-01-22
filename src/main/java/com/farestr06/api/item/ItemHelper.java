@@ -23,6 +23,10 @@ public final class ItemHelper {
         return makeAdvancedBlockItemWithDefaultSettings(block, BlockItem::new);
     }
 
+    public static Item makeSimpleAliasedBlockItem(Block block, Identifier itemId) {
+        return makeAdvancedAliasedBlockItemWithDefaultSettings(block, itemId, BlockItem::new);
+    }
+
     /**
      * Makes a basic block with custom properties/settings.
      * @param block The block that the block item should place
@@ -33,6 +37,10 @@ public final class ItemHelper {
         return makeAdvancedBlockItem(block, BlockItem::new, settings);
     }
 
+    public static Item makeAliasedBlockItem(Block block, Identifier itemId, Item.Settings settings) {
+        return makeAdvancedAliasedBlockItem(block, itemId, BlockItem::new, settings);
+    }
+
     /**
      * Makes an advanced block item with default properties/settings.
      * @param block The block that the block item should place
@@ -41,6 +49,9 @@ public final class ItemHelper {
      */
     public static Item makeAdvancedBlockItemWithDefaultSettings(Block block, BiFunction<Block, Item.Settings, Item> factory) {
         return makeAdvancedBlockItem(block, factory, new Item.Settings());
+    }
+    public static Item makeAdvancedAliasedBlockItemWithDefaultSettings(Block block, Identifier itemId, BiFunction<Block, Item.Settings, Item> factory) {
+        return makeAdvancedAliasedBlockItem(block, itemId, factory, new Item.Settings());
     }
 
     /**
@@ -54,6 +65,12 @@ public final class ItemHelper {
     public static Item makeAdvancedBlockItem(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
         return register(
                 keyFromBlock(block.getRegistryEntry().registryKey()), itemSettings -> factory.apply(block, itemSettings), settings.useBlockPrefixedTranslationKey()
+        );
+    }
+    @SuppressWarnings("deprecation")
+    public static Item makeAdvancedAliasedBlockItem(Block block, Identifier itemId, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
+        return register(
+                keyOf(itemId), itemSettings -> factory.apply(block, itemSettings), settings.useBlockPrefixedTranslationKey()
         );
     }
 
@@ -143,6 +160,10 @@ public final class ItemHelper {
      */
     private static RegistryKey<Item> keyOf(Identifier id) {
         return RegistryKey.of(RegistryKeys.ITEM, id);
+    }
+
+    public static Function<Item.Settings, Item> createBlockItemWithUniqueName(Block block) {
+        return settings -> new BlockItem(block, settings.useItemPrefixedTranslationKey());
     }
 
     /**
