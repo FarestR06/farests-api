@@ -8,8 +8,7 @@
 		"FarestR06"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/FarestR06/farests-api.git"
 	},
 	"license": "LGPLv3",
 	"icon": "assets/fr06-api/icon.png",
