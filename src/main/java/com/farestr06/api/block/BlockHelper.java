@@ -154,8 +154,11 @@ public final class BlockHelper {
         return registerWithItem(keyOf(id), factory, blockSettings, itemSettings);
     }
 
-    public static Block makeBlockAndAliasedItem(Identifier blockId, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings blockSettings, Item.Settings itemSettings) {
-        return registerWithItem(keyOf(blockId), factory, blockSettings, itemSettings);
+    public static Block makeBlockAndAliasedItem(
+            Identifier blockId, Identifier itemId, Function<AbstractBlock.Settings, Block> factory,
+            AbstractBlock.Settings blockSettings, Item.Settings itemSettings
+    ) {
+        return registerWithAliasedItem(keyOf(blockId), itemId, factory, blockSettings, itemSettings);
     }
 
     /**
