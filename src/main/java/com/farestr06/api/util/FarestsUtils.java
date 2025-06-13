@@ -8,6 +8,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 
+import java.net.URI;
+
 public class FarestsUtils {
     /**
      * Tells a game screen to open a URL.
@@ -15,7 +17,7 @@ public class FarestsUtils {
      * @param url The URL to open
      */
     public static void openUrl(Screen screen, String url) {
-        screen.handleTextClick(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url)));
+        screen.handleTextClick(Style.EMPTY.withClickEvent(new ClickEvent.OpenUrl(URI.create(url))));
     }
 
     /**
