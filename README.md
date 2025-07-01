@@ -11,26 +11,35 @@ Farest's API can be added to your project via [Modrinth's maven](https://support
 ### build.gradle
 ```gradle
 repositories {
-  exclusiveContent { // Only check Modrinth Maven for Modrinth mods
+  exclusiveContent { 
     forRepository {
       maven {
         name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
+        url = "https://api.modrinth.com/maven" // Add Modrinth maven as a repository
       }
     }
     filter {
-      includeGroup "maven.modrinth"
+      includeGroup "maven.modrinth" // Check Modrinth maven for only Modrinth mods
     }
   }
 }
 
 dependencies {
-  modImplementation "maven.modrinth:farests-api:${project.farests_api_version}"
+  // Add Farest's API to project
+  modImplementation "maven.modrinth:farests-api:${project.farests_api_version}" // Reference version from gradle.properties to change versions quickly
 }
 ```
 
 ### gradle.properties
 ```properties
 # Dependencies
-farests_api_version=[MOD VERSION]
+farests_api_version=[MOD VERSION] # Specify mod version to access from build.gradle
+```
+### fabric.mod.json
+```json
+{
+  "depends": {
+    "fr06-api": ">=[MOD VERSION]"
+  }
+}
 ```
