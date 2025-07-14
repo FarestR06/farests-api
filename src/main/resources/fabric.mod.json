@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "fr06-api",
-	"version": "3.4.0+1.21.5",
+	"version": "3.4.1+1.21.5",
 	"name": "Farest's API",
 	"description": "Various utilities for FarestR06's mods. Feel free to use them for yourself!",
 	"authors": [
