@@ -71,13 +71,13 @@ public final class BlockHelper {
      * the necessary keys automatically.
      */
     public static Block registerWithSimpleItem(RegistryKey<Block> key, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
-        Block block = Registry.register(Registries.BLOCK, key, factory.apply(settings.registryKey(key)));;
+        Block block = Registry.register(Registries.BLOCK, key, factory.apply(settings.registryKey(key)));
         ItemHelper.makeSimpleBlockItem(block);
         return block;
     }
 
     public static Block registerWithSimpleAliasedItem(RegistryKey<Block> key, Identifier itemId, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
-        Block block = Registry.register(Registries.BLOCK, key, factory.apply(settings.registryKey(key)));;
+        Block block = Registry.register(Registries.BLOCK, key, factory.apply(settings.registryKey(key)));
         ItemHelper.makeSimpleAliasedBlockItem(block, itemId);
         return block;
     }

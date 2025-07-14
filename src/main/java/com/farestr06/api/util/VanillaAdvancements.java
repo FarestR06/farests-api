@@ -127,10 +127,6 @@ public final class VanillaAdvancements {
          */
         public static final AdvancementEntry LOOT_BASTION = advancement("nether/loot_bastion");
         /**
-         * Country Lode, Take Me Home - Use a Compass on a Lodestone
-         */
-        public static final AdvancementEntry USE_LODESTONE = advancement("nether/use_lodestone");
-        /**
          * Cover Me in Debris - Get a full suit of Netherite armor
          */
         public static final AdvancementEntry OBTAIN_FULL_SUIT_OF_NETHERITE_ARMOR = advancement("nether/netherite_armor");
@@ -373,13 +369,21 @@ public final class VanillaAdvancements {
          */
         public static final AdvancementEntry CRAFT_CRAFTER_WITH_CRAFTER = advancement("adventure/crafters_crafting_crafters");
         /**
+         * Country Lode, Take Me Home - Use a Compass on a Lodestone
+         */
+        public static final AdvancementEntry USE_LODESTONE = advancement("adventure/use_lodestone");
+        /**
+         * Heart Transplanter - Place a Creaking Heart with the correct alignment between two Pale Oak Log blocks
+         */
+        public static final AdvancementEntry SET_UP_CREAKING_HEART = advancement("adventure/heart_transplanter");
+        /**
          * Lighten Up - Scrape a Copper Bulb with an Axe to make it brighter
          */
         public static final AdvancementEntry CLEAN_COPPER_BULB = advancement("adventure/lighten_up");
         /**
          * Who Needs Rockets? - Use a Wind Charge to launch yourself upwards 8 blocks
          */
-        public static final AdvancementEntry SEVEN_BLOCK_JUMP = advancement("adventure/who_needs_rockets");
+        public static final AdvancementEntry SEVEN_BLOCK_BOOST_WITH_WIND_CHARGE = advancement("adventure/who_needs_rockets");
         /**
          * Under Lock and Key - Use a Trial Key on a Vault
          */
@@ -514,7 +518,11 @@ public final class VanillaAdvancements {
         /**
          * Shear Brilliance - Remove Wolf Armor from a Wolf using Shears
          */
-        public static final AdvancementEntry REMOVE_WOLF_ARNOR = advancement("husbandry/remove_wolf_armor");
+        public static final AdvancementEntry REMOVE_WOLF_ARMOR = advancement("husbandry/remove_wolf_armor");
+        /**
+         * Stay Hydrated! - Place a Dried Ghast block into water
+         */
+        public static final AdvancementEntry PLACE_DRIED_GHAST_IN_WATER = advancement("husbandry/place_dried_ghast_in_water");
     }
 
     private static AdvancementEntry advancement(String path) {
