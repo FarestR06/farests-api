@@ -38,7 +38,7 @@ public final class ItemHelper {
     }
 
     public static Item makeAliasedBlockItem(Block block, Identifier itemId, Item.Settings settings) {
-        return makeAdvancedAliasedBlockItem(block, itemId, BlockItem::new, settings);
+        return makeAdvancedBlockItemWithUniqueName(block, itemId, BlockItem::new, settings);
     }
 
     /**
@@ -51,7 +51,7 @@ public final class ItemHelper {
         return makeAdvancedBlockItem(block, factory, new Item.Settings());
     }
     public static Item makeAdvancedAliasedBlockItemWithDefaultSettings(Block block, Identifier itemId, BiFunction<Block, Item.Settings, Item> factory) {
-        return makeAdvancedAliasedBlockItem(block, itemId, factory, new Item.Settings());
+        return makeAdvancedBlockItemWithUniqueName(block, itemId, factory, new Item.Settings());
     }
 
     /**
@@ -64,11 +64,11 @@ public final class ItemHelper {
     @SuppressWarnings("deprecation")
     public static Item makeAdvancedBlockItem(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
         return register(
-                keyFromBlock(block.getRegistryEntry().registryKey()), itemSettings -> factory.apply(block, itemSettings.useItemPrefixedTranslationKey()), settings.useBlockPrefixedTranslationKey()
+                keyFromBlock(block.getRegistryEntry().registryKey()), itemSettings -> factory.apply(block, itemSettings), settings.useBlockPrefixedTranslationKey()
         );
     }
     @SuppressWarnings("deprecation")
-    public static Item makeAdvancedAliasedBlockItem(Block block, Identifier itemId, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
+    public static Item makeAdvancedBlockItemWithUniqueName(Block block, Identifier itemId, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
         return register(
                 keyOf(itemId), itemSettings -> factory.apply(block, itemSettings.useItemPrefixedTranslationKey()), settings.useBlockPrefixedTranslationKey()
         );

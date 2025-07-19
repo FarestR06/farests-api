@@ -198,7 +198,7 @@ public final class BlockHelper {
             Item.Settings itemSettings
     ) {
         Block block = Registry.register(Registries.BLOCK, key, blockFactory.apply(blockSettings.registryKey(key)));
-        ItemHelper.makeAdvancedAliasedBlockItem(block, itemId, itemFactory, itemSettings);
+        ItemHelper.makeAdvancedBlockItemWithUniqueName(block, itemId, itemFactory, itemSettings);
         return block;
     }
 
