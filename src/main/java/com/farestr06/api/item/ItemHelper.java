@@ -64,10 +64,9 @@ public final class ItemHelper {
     @SuppressWarnings("deprecation")
     public static Item makeAdvancedBlockItem(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
         return register(
-                keyFromBlock(block.getRegistryEntry().registryKey()), itemSettings -> factory.apply(block, itemSettings.useItemPrefixedTranslationKey()), settings.useBlockPrefixedTranslationKey()
+                keyFromBlock(block.getRegistryEntry().registryKey()), itemSettings -> factory.apply(block, itemSettings), settings.useBlockPrefixedTranslationKey()
         );
     }
-    @SuppressWarnings("deprecation")
     public static Item makeAdvancedAliasedBlockItem(Block block, Identifier itemId, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
         return register(
                 keyOf(itemId), itemSettings -> factory.apply(block, itemSettings.useItemPrefixedTranslationKey()), settings.useBlockPrefixedTranslationKey()
