@@ -36,11 +36,6 @@ dependencies {
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 }
 
-def includeMod(String dep) {
-	dependencies.modImplementation(dep)
-	dependencies.include(dep)
-}
-
 processResources {
 	inputs.property "version", project.version
 
@@ -84,6 +79,7 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 		mavenCentral()
+		mavenLocal()
 	}
 }
 
