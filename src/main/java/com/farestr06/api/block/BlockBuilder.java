@@ -11,6 +11,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -161,21 +162,24 @@ public class BlockBuilder extends GameObjectBuilder<Block> {
 
 
     @Override
-    public Optional<Block> buildOptional() {
+    @Nullable
+    public Block buildOptional() {
         if (gameObject != null) {
-            return Optional.of(Registry.register(this.registry, this.makeKey(), this.gameObject));
+            return Registry.register(this.registry, this.makeKey(), this.gameObject);
         }
-        return Optional.empty();
+        return null;
     }
-    public Optional<Block> buildOptional(String name, Translator translator) {
+    @Nullable
+    public Block buildOptional(String name, Translator translator) {
         if (gameObject != null) {
             Block block = Registry.register(this.registry, this.makeKey(), this.gameObject);
             translator.addBlock(block, name);
-            return Optional.of(block);
+            return block;
         }
-        return Optional.empty();
+        return null;
     }
-    public Optional<Block> buildOptionalWithItem() {
+    @Nullable
+    public Block buildOptionalWithItem() {
         if (gameObject != null) {
             Block block = Registry.register(this.registry, this.makeKey(), this.gameObject);
             RegistryKey<Item> itemKey = ItemBuilder.makeKey(this.aliasedLocation);
@@ -183,11 +187,12 @@ public class BlockBuilder extends GameObjectBuilder<Block> {
                     Registries.ITEM, itemKey,
                     new BlockItem(block, new Item.Settings().registryKey(itemKey))
             );
-            return Optional.of(block);
+            return block;
         }
-        return Optional.empty();
+        return null;
     }
-    public Optional<Block> buildOptionalWithItem(String name, Translator translator) {
+    @Nullable
+    public Block buildOptionalWithItem(String name, Translator translator) {
         if (gameObject != null) {
             Block block = Registry.register(this.registry, this.makeKey(), this.gameObject);
             RegistryKey<Item> itemKey = ItemBuilder.makeKey(this.aliasedLocation);
@@ -196,12 +201,13 @@ public class BlockBuilder extends GameObjectBuilder<Block> {
                     new BlockItem(block, new Item.Settings().registryKey(itemKey))
             );
             translator.addBlock(block, name);
-            return Optional.of(block);
+            return block;
         }
-        return Optional.empty();
+        return null;
     }
 
-    public Optional<Block> buildOptionalWithItemAndUniqueName() {
+    @Nullable
+    public Block buildOptionalWithItemAndUniqueName() {
         if (gameObject != null) {
             Block block = Registry.register(this.registry, this.makeKey(), this.gameObject);
             RegistryKey<Item> itemKey = ItemBuilder.makeKey(this.aliasedLocation);
@@ -209,11 +215,13 @@ public class BlockBuilder extends GameObjectBuilder<Block> {
                     Registries.ITEM, itemKey,
                     new BlockItem(block, new Item.Settings().registryKey(itemKey).useItemPrefixedTranslationKey())
             );
-            return Optional.of(block);
+            return block;
         }
-        return Optional.empty();
+        return null;
     }
-    public Optional<Block> buildOptionalWithItem(String blockName, String itemName, Translator translator) {
+
+    @Nullable
+    public Block buildOptionalWithItem(String blockName, String itemName, Translator translator) {
         if (gameObject != null) {
             Block block = Registry.register(this.registry, this.makeKey(), this.gameObject);
             RegistryKey<Item> itemKey = ItemBuilder.makeKey(this.aliasedLocation);
@@ -223,12 +231,13 @@ public class BlockBuilder extends GameObjectBuilder<Block> {
             );
             translator.addBlock(block, blockName);
             translator.addItem(item, itemName);
-            return Optional.of(block);
+            return block;
         }
-        return Optional.empty();
+        return null;
     }
 
-    public Optional<Block> buildOptionalWithItem(Item.Settings itemSettings) {
+    @Nullable
+    public Block buildOptionalWithItem(Item.Settings itemSettings) {
         if (gameObject != null) {
             Block block = Registry.register(this.registry, this.makeKey(), this.gameObject);
             RegistryKey<Item> itemKey = ItemBuilder.makeKey(this.aliasedLocation);
@@ -236,11 +245,12 @@ public class BlockBuilder extends GameObjectBuilder<Block> {
                     Registries.ITEM, itemKey,
                     new BlockItem(block, itemSettings.registryKey(itemKey))
             );
-            return Optional.of(block);
+            return block;
         }
-        return Optional.empty();
+        return null;
     }
-    public Optional<Block> buildOptionalWithItem(Item.Settings itemSettings, String name, Translator translator) {
+    @Nullable
+    public Block buildOptionalWithItem(Item.Settings itemSettings, String name, Translator translator) {
         if (gameObject != null) {
             Block block = Registry.register(this.registry, this.makeKey(), this.gameObject);
             RegistryKey<Item> itemKey = ItemBuilder.makeKey(this.aliasedLocation);
@@ -250,12 +260,12 @@ public class BlockBuilder extends GameObjectBuilder<Block> {
             );
             translator.addBlock(block, name);
             translator.addItem(item, name);
-            return Optional.of(block);
+            return block;
         }
-        return Optional.empty();
+        return null;
     }
-
-    public Optional<Block> buildOptionalWithItemAndUniqueName(Item.Settings itemSettings) {
+    @Nullable
+    public Block buildOptionalWithItemAndUniqueName(Item.Settings itemSettings) {
         if (gameObject != null) {
             Block block = Registry.register(this.registry, this.makeKey(), this.gameObject);
             RegistryKey<Item> itemKey = ItemBuilder.makeKey(this.aliasedLocation);
@@ -263,11 +273,12 @@ public class BlockBuilder extends GameObjectBuilder<Block> {
                     Registries.ITEM, itemKey,
                     new BlockItem(block, itemSettings.registryKey(itemKey).useItemPrefixedTranslationKey())
             );
-            return Optional.of(block);
+            return block;
         }
-        return Optional.empty();
+        return null;
     }
-    public Optional<Block> buildOptionalWithItemAndUniqueName(Item.Settings itemSettings, String blockName, String itemName, Translator translator) {
+    @Nullable
+    public Block buildOptionalWithItemAndUniqueName(Item.Settings itemSettings, String blockName, String itemName, Translator translator) {
         if (gameObject != null) {
             Block block = Registry.register(this.registry, this.makeKey(), this.gameObject);
             RegistryKey<Item> itemKey = ItemBuilder.makeKey(this.aliasedLocation);
@@ -277,8 +288,8 @@ public class BlockBuilder extends GameObjectBuilder<Block> {
             );
             translator.addBlock(block, blockName);
             translator.addItem(item, itemName);
-            return Optional.of(block);
+            return block;
         }
-        return Optional.empty();
+        return null;
     }
 }

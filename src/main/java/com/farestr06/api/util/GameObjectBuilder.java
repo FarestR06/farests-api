@@ -4,8 +4,7 @@ import com.farestr06.api.block.BlockBuilder;
 import com.farestr06.api.item.ItemBuilder;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-
-import java.util.Optional;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class GameObjectBuilder<T> {
     protected final Registry<T> registry;
@@ -28,8 +27,9 @@ public abstract class GameObjectBuilder<T> {
         return Registry.register(registry, location, gameObject);
     }
 
-    public Optional<T> buildOptional() {
-        return Optional.of(Registry.register(registry, location, gameObject));
+    @Nullable
+    public T buildOptional() {
+        return Registry.register(registry, location, gameObject);
     }
 
     public static ItemBuilder item(Identifier location) {

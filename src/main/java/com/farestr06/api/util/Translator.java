@@ -18,6 +18,12 @@ import net.minecraft.util.Identifier;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A class that maps strings to game objects, so translation can be automated.
+ * To use the translator, instantiate it in an easy location, like the mod's entrypoint or language provider.
+ * <p>
+ * Once all objects are added, use the {@link Translator#translate(FabricLanguageProvider.TranslationBuilder)} method to generate the translations.
+ */
 public class Translator {
     private final Map<String, String> keyTranslations = new HashMap<>();
     private final Map<Identifier, String> resourceLocationTranslations = new HashMap<>();
@@ -69,9 +75,16 @@ public class Translator {
         subtitleTranslations.put(sound, value);
     }
 
+    /**
+     * Once all objects and translations are added, this method is used to send them to a translation builder.
+     * @param builder A translation builder from your mod's language provider
+     */
     public void translate(FabricLanguageProvider.TranslationBuilder builder) {
         for (String key : keyTranslations.keySet()) {
             builder.add(key, keyTranslations.get(key));
+        }
+        for (Identifier location : resourceLocationTranslations.keySet()) {
+            builder.add(location, resourceLocationTranslations.get(location));
         }
         for (Block key : blockTranslations.keySet()) {
             builder.add(key, blockTranslations.get(key));

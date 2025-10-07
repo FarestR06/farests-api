@@ -10,7 +10,7 @@ import net.minecraft.util.shape.VoxelShape;
 
 import java.net.URI;
 
-public class FarestsUtils {
+public final class FarestsUtils {
     /**
      * Tells a game screen to open a URL.
      * @param screen The screen to open the URL in
@@ -52,15 +52,15 @@ public class FarestsUtils {
         return Block.createCuboidShape(widthStart, 0, depthStart, widthEnd, height, depthEnd);
     }
 
-    public static class Math {
+    public static final class Math {
         /**
          * Rounds a value to a fraction with the specified denominator
          * @param value The value to be rounded
-         * @param divisorOfOne The denominator of the fraction to round to
-         * @return
+         * @param denominator The denominator of the fraction to round to
+         * @return The rounded value
          */
-        public static double roundToFraction(double value, int divisorOfOne) {
-            return java.lang.Math.round(value * divisorOfOne) / ((double) divisorOfOne);
+        public static double roundToFraction(double value, int denominator) {
+            return java.lang.Math.round(value * denominator) / ((double) denominator);
         }
 
 
@@ -122,7 +122,7 @@ public class FarestsUtils {
 
 
         /**
-         * Linearly a value and rounds it to a multiple 0.1
+         * Linearly maps a value and rounds it to a multiple of 0.1
          * @param value The input value
          * @param oldStart The starting value of the original range
          * @param oldEnd The end value of the original range
@@ -136,7 +136,7 @@ public class FarestsUtils {
         }
 
         /**
-         * Linearly a value and rounds it to 0.1f
+         * Linearly maps a value and rounds it to a multiple of 0.1f
          * @param value The input value
          * @param oldStart The starting value of the original range
          * @param oldEnd The end value of the original range

@@ -8,6 +8,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -63,19 +64,21 @@ public class ItemBuilder extends GameObjectBuilder<Item> {
         return Registry.register(this.registry, this.makeKey(), this.gameObject);
     }
 
-    public Optional<Item> buildOptional(String name, Translator translator) {
+    @Nullable
+    public Item buildOptional(String name, Translator translator) {
         if (this.gameObject != null) {
             Item item = Registry.register(this.registry, this.makeKey(), this.gameObject);
             translator.addItem(item, name);
-            return Optional.of(item);
+            return item;
         }
-        return Optional.empty();
+        return null;
     }
     @Override
-    public Optional<Item> buildOptional() {
+    @Nullable
+    public Item buildOptional() {
         if (gameObject != null) {
-            return Optional.of(Registry.register(this.registry, this.makeKey(), this.gameObject));
+            return Registry.register(this.registry, this.makeKey(), this.gameObject);
         }
-        return Optional.empty();
+        return null;
     }
 }

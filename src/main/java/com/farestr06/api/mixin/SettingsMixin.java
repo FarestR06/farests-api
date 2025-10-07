@@ -49,7 +49,7 @@ public class SettingsMixin implements FarestsItemSettings {
         settings.component(DataComponentTypes.PROVIDES_TRIM_MATERIAL, map.get(DataComponentTypes.PROVIDES_TRIM_MATERIAL));
         settings.component(DataComponentTypes.JUKEBOX_PLAYABLE, map.get(DataComponentTypes.JUKEBOX_PLAYABLE));
         settings.component(DataComponentTypes.PROVIDES_BANNER_PATTERNS, map.get(DataComponentTypes.PROVIDES_BANNER_PATTERNS));
-        return FarestsItemSettings.super.copy(item);
+        return settings;
     }
 
     @Override
