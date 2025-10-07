@@ -17,10 +17,10 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
 import java.util.Random;
 
 
@@ -37,7 +37,8 @@ public class FarestsAPI implements ModInitializer {
 			SoundEvent.of(BONK_ID)
 	);
 
-	private static final Optional<Block> FUNKY_LOL = GameObjectBuilder
+    @Nullable
+	private static final Block FUNKY_LOL = GameObjectBuilder
 			.block(Identifier.of(MOD_ID, "funky_lol"), FabricLoader.getInstance().isDevelopmentEnvironment())
 			.settings(AbstractBlock.Settings.copy(Blocks.NETHERITE_BLOCK))
 			.construct(CryingObsidianBlock::new)
@@ -50,7 +51,9 @@ public class FarestsAPI implements ModInitializer {
 		} else LOGGER.info("farest");
 
 		// Add random block to Creative Tab if we're in an IDE
-        FUNKY_LOL.ifPresent(block -> ItemGroupEvents.modifyEntriesEvent(ItemGroups.OPERATOR).register(entries -> entries.add(block)));
+        if (FUNKY_LOL != null && FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            ItemGroupEvents.modifyEntriesEvent(ItemGroups.OPERATOR).register(entries -> entries.add(FUNKY_LOL));
+        }
 
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			NoteblockInstrumentRegistry.INSTANCE.add(Blocks.BAMBOO_MOSAIC, BONK_EVENT);
