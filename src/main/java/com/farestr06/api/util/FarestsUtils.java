@@ -1,12 +1,12 @@
 package com.farestr06.api.util;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.Style;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.net.URI;
 
@@ -17,7 +17,7 @@ public final class FarestsUtils {
      * @param url The URL to open
      */
     public static void openUrl(Screen screen, String url) {
-        screen.handleTextClick(Style.EMPTY.withClickEvent(new ClickEvent.OpenUrl(URI.create(url))));
+        screen.handleComponentClicked(Style.EMPTY.withClickEvent(new ClickEvent.OpenUrl(URI.create(url))));
     }
 
     /**
@@ -34,7 +34,7 @@ public final class FarestsUtils {
         double widthEnd = width - widthStart;
         double heightEnd = height - heightStart;
         double depthEnd = depth - depthStart;
-        return Block.createCuboidShape(widthStart, heightStart, depthStart, widthEnd, heightEnd, depthEnd);
+        return Block.box(widthStart, heightStart, depthStart, widthEnd, heightEnd, depthEnd);
     }
 
     /**
@@ -49,7 +49,7 @@ public final class FarestsUtils {
         double depthStart = (16d - depth) / 2d;
         double widthEnd = width - widthStart;
         double depthEnd = depth - depthStart;
-        return Block.createCuboidShape(widthStart, 0, depthStart, widthEnd, height, depthEnd);
+        return Block.box(widthStart, 0, depthStart, widthEnd, height, depthEnd);
     }
 
     public static final class Math {
@@ -131,7 +131,7 @@ public final class FarestsUtils {
          * @return The mapped and rounded value
          */
         public static double mapWithOneDecimalPlace(double value, double oldStart, double oldEnd, double newStart, double newEnd) {
-            double mapped = MathHelper.map(value, oldStart, oldEnd, newStart, newEnd);
+            double mapped = Mth.map(value, oldStart, oldEnd, newStart, newEnd);
             return roundToTenth(mapped);
         }
 
@@ -145,7 +145,7 @@ public final class FarestsUtils {
          * @return The mapped and rounded value
          */
         public static float mapWithOneDecimalPlace(float value, float oldStart, float oldEnd, float newStart, float newEnd) {
-            float mapped = MathHelper.map(value, oldStart, oldEnd, newStart, newEnd);
+            float mapped = Mth.map(value, oldStart, oldEnd, newStart, newEnd);
             return roundToTenth(mapped);
         }
 
@@ -155,7 +155,7 @@ public final class FarestsUtils {
          * @param bound The upper bound of the generated float
          * @return A randomly generated float between 0 and the upper bound
          */
-        public static float randomBigFloat(Random rand, int bound) {
+        public static float randomBigFloat(RandomSource rand, int bound) {
             return randomBigFloat(rand, 0, bound);
         }
 
@@ -166,8 +166,8 @@ public final class FarestsUtils {
          * @param max The upper bound of the generated float
          * @return A randomly generated float between the min and max
          */
-        public static float randomBigFloat(Random rand, int min, int max) {
-            int i = rand.nextBetween(min, max);
+        public static float randomBigFloat(RandomSource rand, int min, int max) {
+            int i = rand.nextIntBetweenInclusive(min, max);
             return i * rand.nextFloat();
         }
     }

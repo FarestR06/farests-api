@@ -1,19 +1,18 @@
 package com.farestr06.api.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public final class ItemHelper {
-
     /**
      * Makes a basic block with default properties/settings.
      * @param block The block that the block item should place
@@ -23,8 +22,8 @@ public final class ItemHelper {
         return makeAdvancedBlockItemWithDefaultSettings(block, BlockItem::new);
     }
 
-    public static Item makeSimpleAliasedBlockItem(Block block, Identifier itemId) {
-        return makeAdvancedAliasedBlockItemWithDefaultSettings(block, itemId, BlockItem::new);
+    public static Item makeSimpleAliasedBlockItem(Block block, ResourceLocation location) {
+        return makeAdvancedAliasedBlockItemWithDefaultSettings(block, location, BlockItem::new);
     }
 
     /**
@@ -33,12 +32,12 @@ public final class ItemHelper {
      * @param settings The properties/settings to be applied to the item
      * @return The registered item
      */
-    public static Item makeBlockItem(Block block, Item.Settings settings) {
+    public static Item makeBlockItem(Block block, Item.Properties settings) {
         return makeAdvancedBlockItem(block, BlockItem::new, settings);
     }
 
-    public static Item makeAliasedBlockItem(Block block, Identifier itemId, Item.Settings settings) {
-        return makeAdvancedBlockItemWithUniqueName(block, itemId, BlockItem::new, settings);
+    public static Item makeAliasedBlockItem(Block block, ResourceLocation location, Item.Properties settings) {
+        return makeAdvancedBlockItemWithUniqueName(block, location, BlockItem::new, settings);
     }
 
     /**
@@ -47,11 +46,11 @@ public final class ItemHelper {
      * @param factory The bi-function used to create the block item
      * @return The registered item
      */
-    public static Item makeAdvancedBlockItemWithDefaultSettings(Block block, BiFunction<Block, Item.Settings, Item> factory) {
-        return makeAdvancedBlockItem(block, factory, new Item.Settings());
+    public static Item makeAdvancedBlockItemWithDefaultSettings(Block block, BiFunction<Block, Item.Properties, Item> factory) {
+        return makeAdvancedBlockItem(block, factory, new Item.Properties());
     }
-    public static Item makeAdvancedAliasedBlockItemWithDefaultSettings(Block block, Identifier itemId, BiFunction<Block, Item.Settings, Item> factory) {
-        return makeAdvancedBlockItemWithUniqueName(block, itemId, factory, new Item.Settings());
+    public static Item makeAdvancedAliasedBlockItemWithDefaultSettings(Block block, ResourceLocation location, BiFunction<Block, Item.Properties, Item> factory) {
+        return makeAdvancedBlockItemWithUniqueName(block, location, factory, new Item.Properties());
     }
 
     /**
@@ -62,56 +61,56 @@ public final class ItemHelper {
      * @return The registered item
      */
     @SuppressWarnings("deprecation")
-    public static Item makeAdvancedBlockItem(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
+    public static Item makeAdvancedBlockItem(Block block, BiFunction<Block, Item.Properties, Item> factory, Item.Properties settings) {
         return register(
-                keyFromBlock(block.getRegistryEntry().registryKey()), itemSettings -> factory.apply(block, itemSettings), settings.useBlockPrefixedTranslationKey()
+                keyFromBlock(BuiltInRegistries.BLOCK.getResourceKey(block).orElseThrow()), itemSettings -> factory.apply(block, itemSettings), settings.useItemDescriptionPrefix()
         );
     }
     @SuppressWarnings("deprecation")
-    public static Item makeAdvancedBlockItemWithUniqueName(Block block, Identifier itemId, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
+    public static Item makeAdvancedBlockItemWithUniqueName(Block block, ResourceLocation location, BiFunction<Block, Item.Properties, Item> factory, Item.Properties settings) {
         return register(
-                keyOf(itemId), itemSettings -> factory.apply(block, itemSettings.useItemPrefixedTranslationKey()), settings.useBlockPrefixedTranslationKey()
+                keyOf(location), itemSettings -> factory.apply(block, itemSettings.useItemDescriptionPrefix()), settings.useBlockDescriptionPrefix()
         );
     }
 
     /**
      * Makes an advanced item with default properties/settings.
-     * @param id The item's resource location/identifier
+     * @param location The item's resource location/ResourceLocation
      * @param factory The function used to create the item
      * @return The registered item
      */
-    public static Item makeAdvancedItemWithDefaultSettings(Identifier id, Function<Item.Settings, Item> factory) {
-        return register(keyOf(id), factory);
+    public static Item makeAdvancedItemWithDefaultSettings(ResourceLocation location, Function<Item.Properties, Item> factory) {
+        return register(keyOf(location), factory);
     }
 
     /**
      * Makes an advanced item.
-     * @param id The item's resource location/identifier
+     * @param location The item's resource location/ResourceLocation
      * @param factory The function used to create the item
      * @param settings The properties/settings to be applied to the item
      * @return The registered item
      */
-    public static Item makeAdvancedItem(Identifier id, Function<Item.Settings, Item> factory, Item.Settings settings) {
-        return register(keyOf(id), factory, settings);
+    public static Item makeAdvancedItem(ResourceLocation location, Function<Item.Properties, Item> factory, Item.Properties settings) {
+        return register(keyOf(location), factory, settings);
     }
 
     /**
      * Makes a basic item with custom properties/settings
-     * @param id The item's resource location/identifier
+     * @param location The item's resource location/ResourceLocation
      * @param settings The properties/settings to be applied to the item
      * @return The registered item
      */
-    public static Item makeItem(Identifier id, Item.Settings settings) {
-        return register(keyOf(id), Item::new, settings);
+    public static Item makeItem(ResourceLocation location, Item.Properties settings) {
+        return register(keyOf(location), Item::new, settings);
     }
 
     /**
      * Makes a basic item with default properties/settings.
-     * @param id The item's resource location/identifier
+     * @param location The item's resource location/ResourceLocation
      * @return The registered item
      */
-    public static Item makeSimpleItem(Identifier id) {
-        return register(keyOf(id), Item::new, new Item.Settings());
+    public static Item makeSimpleItem(ResourceLocation location) {
+        return register(keyOf(location), Item::new, new Item.Properties());
     }
 
     /**
@@ -119,11 +118,11 @@ public final class ItemHelper {
      * @param key The resource/registry key, which is used to help with names and models
      * @param factory The function used to create the advanced item
      * @return The registered item
-     * @apiNote This method requires a resource/registry key. Ideally, you should use {@link ItemHelper#makeAdvancedItemWithDefaultSettings(Identifier, Function)}, which creates
+     * @apiNote This method requires a resource/registry key. Ideally, you should use {@link ItemHelper#makeAdvancedItemWithDefaultSettings(ResourceLocation, Function)}, which creates
      * the necessary keys automatically.
      */
-    public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory) {
-        return register(key, factory, new Item.Settings());
+    public static Item register(ResourceKey<Item> key, Function<Item.Properties, Item> factory) {
+        return register(key, factory, new Item.Properties());
     }
 
     /**
@@ -135,70 +134,70 @@ public final class ItemHelper {
      * @apiNote This method requires a resource/registry key. Ideally, you should use the other methods, which create
      * the necessary keys automatically.
      */
-    public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings) {
-        Item item = factory.apply(settings.registryKey(key));
+    public static Item register(ResourceKey<Item> key, Function<Item.Properties, Item> factory, Item.Properties settings) {
+        Item item = factory.apply(settings.setId(key));
         if (item instanceof BlockItem blockItem) {
-            blockItem.appendBlocks(Item.BLOCK_ITEMS, item);
+            blockItem.registerBlocks(Item.BY_BLOCK, item);
         }
 
-        return Registry.register(Registries.ITEM, key, item);
+        return Registry.register(BuiltInRegistries.ITEM, key, item);
     }
 
     /**
-     * Creates a resource/registry key from a block's resource location/identifier.
+     * Creates a resource/registry key from a block's resource location/ResourceLocation.
      * @param blockKey The block whose id will be used to creeate the key
      * @return A resource/registry key created from the given block's id
      */
-    private static RegistryKey<Item> keyFromBlock(RegistryKey<Block> blockKey) {
-        return RegistryKey.of(RegistryKeys.ITEM, blockKey.getValue());
+    private static ResourceKey<Item> keyFromBlock(ResourceKey<Block> blockKey) {
+        return ResourceKey.create(Registries.ITEM, blockKey.registry());
     }
 
     /**
-     * Creates a resource/registry key from a resource location/identifier.
-     * @param id The location/id used to create the key
+     * Creates a resource/registry key from a resource location/ResourceLocation.
+     * @param location The location/id used to create the key
      * @return A resource/registry key created from the given id
      */
-    private static RegistryKey<Item> keyOf(Identifier id) {
-        return RegistryKey.of(RegistryKeys.ITEM, id);
+    private static ResourceKey<Item> keyOf(ResourceLocation location) {
+        return ResourceKey.create(Registries.ITEM, location);
     }
 
-    public static Function<Item.Settings, Item> createBlockItemWithUniqueName(Block block) {
-        return settings -> new BlockItem(block, settings.useItemPrefixedTranslationKey());
+    public static Function<Item.Properties, Item> createBlockItemWithUniqueName(Block block) {
+        return settings -> new BlockItem(block, settings.useItemDescriptionPrefix());
     }
 
     /**
      * Makes a basic item with default properties/settings.
-     * @param id The item's resource location/identifier
+     * @param location The item's resource location/ResourceLocation
      * @return The registered item
      * @deprecated Item creation has changed significantly since MC 1.21.2, making this method outdated.
      */
-    @Deprecated
-    public static Item makeOldSimpleItem(Identifier id) {
-        return makeOldItem(id, new Item.Settings());
+    @Deprecated(forRemoval = true)
+    public static Item makeOldSimpleItem(ResourceLocation location) {
+        return makeOldItem(location, new Item.Properties());
     }
 
     /**
      * Makes a basic item with custom properties/settings.
-     * @param id The item's resource location/identifier
+     * @param location The item's resource location/ResourceLocation
      * @param settings The properties/settings to be applied to the item
      * @return The registered item
      * @deprecated Item creation has changed significantly since MC 1.21.2, making this method outdated.
      */
-    @Deprecated
-    public static Item makeOldItem(Identifier id, Item.Settings settings) {
-        return makeOldAdvancedItem(id, new Item(settings.registryKey(RegistryKey.of(RegistryKeys.ITEM, id))));
+    @Deprecated(forRemoval = true)
+    public static Item makeOldItem(ResourceLocation location, Item.Properties settings) {
+        return makeOldAdvancedItem(location, new Item(settings.setId(ResourceKey.create(Registries.ITEM, location))));
     }
 
     /**
      * Makes an advanced item.
      * @deprecated Item creation has changed significantly since MC 1.21.2, making this method outdated.
-     * @param id The item's resource location/identifier
+     * @param location The item's resource location/ResourceLocation
      * @param advancedItem The item to be registered
      * @return The registered item
      * @apiNote Settings are specified in the Item's constructor.
      */
-    @Deprecated
-    public static Item makeOldAdvancedItem(Identifier id, Item advancedItem) {
-        return Registry.register(Registries.ITEM, id, advancedItem);
+    @Deprecated(forRemoval = true)
+    public static Item makeOldAdvancedItem(ResourceLocation location, Item advancedItem) {
+        return Registry.register(BuiltInRegistries.ITEM, location, advancedItem);
     }
 }

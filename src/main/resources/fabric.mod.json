@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "fr06-api",
-	"version": "4.1.0+1.21.8",
+	"version": "5.0.0+1.21.10",
 	"name": "Farest's API",
 	"description": "Various utilities for FarestR06's mods. Feel free to use them for yourself!",
 	"authors": [
@@ -34,7 +34,7 @@
 			"badges": ["library"]
 		},
 		"loom:injected_interfaces": {
-			"net/minecraft/class_1792\u0024class_1793": ["com/farestr06/api/item/FarestsItemSettings"]
+			"net/minecraft/class_1792\u0024class_1793": ["com/farestr06/api/item/FarestsItemProperties"]
 		}
 	}
 }

@@ -1,104 +1,104 @@
 package com.farestr06.api.effect;
 
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 
 public final class EffectHelper {
     /**
      * Registers and returns a custom status effect
-     * @param id The effect's resource location/identifier
+     * @param location The effect's resource location/identifier
      * @param effect The effect to be registered
      * @return The registered effect
      */
-    public static RegistryEntry<StatusEffect> makeEffect(Identifier id, StatusEffect effect) {
-        return Registry.registerReference(Registries.STATUS_EFFECT, id, effect);
+    public static Holder<MobEffect> makeEffect(ResourceLocation location, MobEffect effect) {
+        return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, location, effect);
     }
 
     /**
      * Creates a simple status effect.
-     * @param id The effect's resource location/identifier
+     * @param location The effect's resource location/identifier
      * @param category Whether the effect is beneficial, neutral or harmful
      * @param color The color of the effect's potions and particles
      * @return The registered effect
      */
-    public static RegistryEntry<StatusEffect> makeSimpleEffect(Identifier id, StatusEffectCategory category, int color) {
-        return makeEffect(id, new SimpleStatusEffect(category, color));
+    public static Holder<MobEffect> makeSimpleEffect(ResourceLocation location, MobEffectCategory category, int color) {
+        return makeEffect(location, new SimpleMobEffect(category, color));
     }
 
     /**
      * Creates a simple status effect with special particle effects.
-     * @param id The effect's resource location/identifier
+     * @param location The effect's resource location/identifier
      * @param category Whether the effect is beneficial, neutral or harmful
      * @param color The color of the effect's potions
      * @param particles The particles emitted by entities with the effect
      * @return The registered effect
      */
-    public static RegistryEntry<StatusEffect> makeSimpleEffectWithSpecialParticles(Identifier id, StatusEffectCategory category, int color, ParticleEffect particles) {
-        return makeEffect(id, new SimpleStatusEffect(category, color, particles));
+    public static Holder<MobEffect> makeSimpleEffectWithSpecialParticles(ResourceLocation location, MobEffectCategory category, int color, ParticleOptions particles) {
+        return makeEffect(location, new SimpleMobEffect(category, color, particles));
     }
 
     /**
      * Creates a simple, beneficial status effect.
-     * @param id The effect's The effect's resource location/identifier
+     * @param location The effect's The effect's resource location/identifier
      * @param color The color of the effect's potions and particles
      * @return The registered effect
      */
-    public static RegistryEntry<StatusEffect> makeSimpleEffectBeneficial(Identifier id, int color) {
-        return makeSimpleEffect(id, StatusEffectCategory.BENEFICIAL, color);
+    public static Holder<MobEffect> makeSimpleEffectBeneficial(ResourceLocation location, int color) {
+        return makeSimpleEffect(location, MobEffectCategory.BENEFICIAL, color);
     }
     /**
      * Creates a simple, beneficial status effect with special particle effects.
-     * @param id The effect's resource location/identifier
+     * @param location The effect's resource location/identifier
      * @param color The color of the effect's potions
      * @param particles The particles emitted by entities with the effect
      * @return The registered effect
      */
-    public static RegistryEntry<StatusEffect> makeSimpleEffectBeneficialWithSpecialParticles(Identifier id, int color, ParticleEffect particles) {
-        return makeSimpleEffectWithSpecialParticles(id, StatusEffectCategory.BENEFICIAL, color, particles);
+    public static Holder<MobEffect> makeSimpleEffectBeneficialWithSpecialParticles(ResourceLocation location, int color, ParticleOptions particles) {
+        return makeSimpleEffectWithSpecialParticles(location, MobEffectCategory.BENEFICIAL, color, particles);
     }
 
     /**
      * Creates a simple, neutral status effect.
-     * @param id The effect's resource location/identifier
+     * @param location The effect's resource location/identifier
      * @param color The color of the effect's potions and particles
      * @return The registered effect
      */
-    public static RegistryEntry<StatusEffect> makeSimpleEffectNeutral(Identifier id, int color) {
-        return makeSimpleEffect(id, StatusEffectCategory.NEUTRAL, color);
+    public static Holder<MobEffect> makeSimpleEffectNeutral(ResourceLocation location, int color) {
+        return makeSimpleEffect(location, MobEffectCategory.NEUTRAL, color);
     }
     /**
      * Creates a simple, neutral status effect with special particle effects.
-     * @param id The effect's resource location/identifier
+     * @param location The effect's resource location/identifier
      * @param color The color of the effect's potions
      * @param particles The particles emitted by entities with the effect
      * @return The registered effect
      */
-    public static RegistryEntry<StatusEffect> makeSimpleEffectNeutralWithSpecialParticles(Identifier id, int color, ParticleEffect particles) {
-        return makeSimpleEffectWithSpecialParticles(id, StatusEffectCategory.NEUTRAL, color, particles);
+    public static Holder<MobEffect> makeSimpleEffectNeutralWithSpecialParticles(ResourceLocation location, int color, ParticleOptions particles) {
+        return makeSimpleEffectWithSpecialParticles(location, MobEffectCategory.NEUTRAL, color, particles);
     }
 
     /**
      * Creates a simple, harmful status effect.
-     * @param id The effect's resource location/identifier
+     * @param location The effect's resource location/identifier
      * @param color The color of the effect's potions and particles
      * @return The registered effect
      */
-    public static RegistryEntry<StatusEffect> makeSimpleEffectHarmful(Identifier id, int color) {
-        return makeSimpleEffect(id, StatusEffectCategory.HARMFUL, color);
+    public static Holder<MobEffect> makeSimpleEffectHarmful(ResourceLocation location, int color) {
+        return makeSimpleEffect(location, MobEffectCategory.HARMFUL, color);
     }
     /**
      * Creates a simple, harmful status effect with special particle effects.
-     * @param id The effect's resource location/identifier
+     * @param location The effect's resource location/identifier
      * @param color The color of the effect's potions
      * @param particles The particles emitted by entities with the effect
      * @return The registered effect
      */
-    public static RegistryEntry<StatusEffect> makeSimpleEffectHarmfulWithSpecialParticles(Identifier id, int color, ParticleEffect particles) {
-        return makeSimpleEffectWithSpecialParticles(id, StatusEffectCategory.HARMFUL, color, particles);
+    public static Holder<MobEffect> makeSimpleEffectHarmfulWithSpecialParticles(ResourceLocation location, int color, ParticleOptions particles) {
+        return makeSimpleEffectWithSpecialParticles(location, MobEffectCategory.HARMFUL, color, particles);
     }
 }
