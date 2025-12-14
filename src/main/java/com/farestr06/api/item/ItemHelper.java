@@ -1,5 +1,6 @@
 package com.farestr06.api.item;
 
+import com.farestr06.api.util.LoggerHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -13,6 +14,10 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public final class ItemHelper {
+    private static void log(ResourceKey<Item> key) {
+        LoggerHelper.get(key.location().getNamespace()).debug("Registering item \"{}\" through Farest's API", key.location());
+    }
+
     /**
      * Makes a basic block with default properties/settings.
      * @param block The block that the block item should place
@@ -140,6 +145,7 @@ public final class ItemHelper {
             blockItem.registerBlocks(Item.BY_BLOCK, item);
         }
 
+        log(key);
         return Registry.register(BuiltInRegistries.ITEM, key, item);
     }
 
@@ -149,7 +155,7 @@ public final class ItemHelper {
      * @return A resource/registry key created from the given block's id
      */
     private static ResourceKey<Item> keyFromBlock(ResourceKey<Block> blockKey) {
-        return ResourceKey.create(Registries.ITEM, blockKey.registry());
+        return ResourceKey.create(Registries.ITEM, blockKey.location());
     }
 
     /**
@@ -163,41 +169,5 @@ public final class ItemHelper {
 
     public static Function<Item.Properties, Item> createBlockItemWithUniqueName(Block block) {
         return settings -> new BlockItem(block, settings.useItemDescriptionPrefix());
-    }
-
-    /**
-     * Makes a basic item with default properties/settings.
-     * @param location The item's resource location/ResourceLocation
-     * @return The registered item
-     * @deprecated Item creation has changed significantly since MC 1.21.2, making this method outdated.
-     */
-    @Deprecated(forRemoval = true)
-    public static Item makeOldSimpleItem(ResourceLocation location) {
-        return makeOldItem(location, new Item.Properties());
-    }
-
-    /**
-     * Makes a basic item with custom properties/settings.
-     * @param location The item's resource location/ResourceLocation
-     * @param settings The properties/settings to be applied to the item
-     * @return The registered item
-     * @deprecated Item creation has changed significantly since MC 1.21.2, making this method outdated.
-     */
-    @Deprecated(forRemoval = true)
-    public static Item makeOldItem(ResourceLocation location, Item.Properties settings) {
-        return makeOldAdvancedItem(location, new Item(settings.setId(ResourceKey.create(Registries.ITEM, location))));
-    }
-
-    /**
-     * Makes an advanced item.
-     * @deprecated Item creation has changed significantly since MC 1.21.2, making this method outdated.
-     * @param location The item's resource location/ResourceLocation
-     * @param advancedItem The item to be registered
-     * @return The registered item
-     * @apiNote Settings are specified in the Item's constructor.
-     */
-    @Deprecated(forRemoval = true)
-    public static Item makeOldAdvancedItem(ResourceLocation location, Item advancedItem) {
-        return Registry.register(BuiltInRegistries.ITEM, location, advancedItem);
     }
 }

@@ -1,6 +1,7 @@
 package com.farestr06.api.block;
 
 import com.farestr06.api.item.ItemHelper;
+import com.farestr06.api.util.LoggerHelper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.BlockItem;
@@ -15,6 +16,9 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public final class BlockHelper {
+    private static void log(ResourceKey<Block> key) {
+        LoggerHelper.get(key.location().getNamespace()).debug("Registering block \"{}\" through Farest's API", key.location());
+    }
 
     /**
      * Makes a block without a corresponding item.
@@ -27,6 +31,7 @@ public final class BlockHelper {
      */
     public static Block register(ResourceKey<Block> key, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties settings) {
         Block block = factory.apply(settings.setId(key));
+        log(key);
         return Registry.register(BuiltInRegistries.BLOCK, key, block);
     }
 
@@ -72,12 +77,14 @@ public final class BlockHelper {
      */
     public static Block registerWithSimpleItem(ResourceKey<Block> key, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties settings) {
         Block block = Registry.register(BuiltInRegistries.BLOCK, key, factory.apply(settings.setId(key)));
+        log(key);
         ItemHelper.makeSimpleBlockItem(block);
         return block;
     }
 
     public static Block registerWithSimpleAliasedItem(ResourceKey<Block> key, ResourceLocation itemId, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties settings) {
         Block block = Registry.register(BuiltInRegistries.BLOCK, key, factory.apply(settings.setId(key)));
+        log(key);
         ItemHelper.makeSimpleAliasedBlockItem(block, itemId);
         return block;
     }
@@ -123,6 +130,7 @@ public final class BlockHelper {
      */
     public static Block registerWithItem(ResourceKey<Block> key, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
         Block block = Registry.register(BuiltInRegistries.BLOCK, key, factory.apply(blockSettings.setId(key)));
+        log(key);
         ItemHelper.makeBlockItem(block, itemSettings);
         return block;
     }
@@ -138,6 +146,7 @@ public final class BlockHelper {
      */
     public static Block registerWithAliasedItem(ResourceKey<Block> key, ResourceLocation itemId, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
         Block block = Registry.register(BuiltInRegistries.BLOCK, key, factory.apply(blockSettings.setId(key)));
+        log(key);
         ItemHelper.makeAliasedBlockItem(block, itemId, itemSettings);
         return block;
     }
@@ -189,6 +198,7 @@ public final class BlockHelper {
             Item.Properties itemSettings
     ) {
         Block block = Registry.register(BuiltInRegistries.BLOCK, key, blockFactory.apply(blockSettings.setId(key)));
+        log(key);
         ItemHelper.makeAdvancedBlockItem(block, itemFactory, itemSettings);
         return block;
     }
@@ -198,6 +208,7 @@ public final class BlockHelper {
             Item.Properties itemSettings
     ) {
         Block block = Registry.register(BuiltInRegistries.BLOCK, key, blockFactory.apply(blockSettings.setId(key)));
+        log(key);
         ItemHelper.makeAdvancedBlockItemWithUniqueName(block, itemId, itemFactory, itemSettings);
         return block;
     }
@@ -290,109 +301,4 @@ public final class BlockHelper {
     ) {
         return makeBlockAndAdvancedAliasedItemWithDefaultSettings(blockId, itemId, Block::new, settings, factory);
     }
-
-
-    /**
-     * Makes a basic block without a corresponding item.
-     * @deprecated Block creation has changed significantly since MC 1.21.2, making this method outdated.
-     * @param id The block's resource location/identifier
-     * @param settings The properties/settings to be applied to the block
-     * @return The registered block
-     */
-    @Deprecated
-    public static Block makeOldBlock(ResourceLocation id, BlockBehaviour.Properties settings) {
-        return Registry.register(BuiltInRegistries.BLOCK, id, new Block(settings.setId(ResourceKey.create(Registries.BLOCK, id))));
-    }
-
-    /**
-     * Makes a basic block and a corresponding item with default properties/settings
-     * @deprecated Block creation has changed significantly since MC 1.21.2, making this method outdated.
-     * @param id The block's and item's resource location/identifier
-     * @param settings The properties/settings to be applied to the block
-     * @return The registered block
-     */
-    @Deprecated
-    public static Block makeOldBlockAndItem(ResourceLocation id, BlockBehaviour.Properties settings) {
-        return makeOldBlockAndItem(id, settings, new Item.Properties());
-    }
-
-    /**
-     * Makes a basic block and a corresponding item with custom properties/settings.
-     * @deprecated Block creation has changed significantly since MC 1.21.2, making this method outdated.
-     * @param id The block's and item's resource location/identifier
-     * @param blockSettings The properties/settings to be applied to the block
-     * @param itemSettings The properties/settings to be applied to the block's item
-     * @return The registered block
-     */
-    @Deprecated
-    public static Block makeOldBlockAndItem(ResourceLocation id, BlockBehaviour.Properties blockSettings, Item.Properties itemSettings) {
-        Block block = makeOldBlock(id, blockSettings);
-        makeOldBlockItem(id, block, itemSettings);
-        return block;
-    }
-
-    /**
-     * Makes an advanced block without a corresponding item.
-     * @deprecated Block creation has changed significantly since MC 1.21.2, making this method outdated.
-     * @param id The block's resource location/identifier
-     * @param advancedBlock The block to be registered
-     * @return The registered block
-     */
-    @Deprecated
-    public static Block makeOldAdvancedBlock(ResourceLocation id, Block advancedBlock) {
-        return Registry.register(BuiltInRegistries.BLOCK, id, advancedBlock);
-    }
-
-    /**
-     * Makes an advanced block and a corresponding item with default properties/settings.
-     * @deprecated Block creation has changed significantly since MC 1.21.2, making this method outdated.
-     * @param id The block's resource location/identifier
-     * @param advancedBlock The block to be registered
-     * @return The registered block
-     */
-    @Deprecated
-    public static Block makeOldAdvancedBlockAndItem(ResourceLocation id, Block advancedBlock) {
-        return makeOldAdvancedBlockAndItem(id, advancedBlock, new Item.Properties());
-    }
-
-    /**
-     * Makes an advanced block and a corresponding item with custom properties/settings.
-     * @deprecated Block creation has changed significantly since MC 1.21.2, making this method outdated.
-     * @param id The block's and item's resource location/identifier
-     * @param advancedBlock The block to be registered
-     * @param settings The properties/settings to be applied to the block's item
-     * @return The registered block
-     */
-    @Deprecated
-    public static Block makeOldAdvancedBlockAndItem(ResourceLocation id, Block advancedBlock, Item.Properties settings) {
-        makeOldBlockItem(id, advancedBlock, settings);
-        return makeOldAdvancedBlock(id, advancedBlock);
-    }
-
-    /**
-     * Makes a block item with default properties/settings.
-     * @deprecated Block creation has changed significantly since MC 1.21.2, making this method outdated.
-     * @param id The item's resource location/identifier
-     * @param block The block that the item should place
-     * @return The registered block item
-     */
-    @Deprecated
-    public static Item makeOldBlockItem(ResourceLocation id, Block block) {
-        return makeOldBlockItem(id, block, new Item.Properties());
-    }
-
-    /**
-     * Makes a block item with custom properties/settings.
-     * @deprecated Block creation has changed significantly since MC 1.21.2, making this method outdated.
-     * @param id The item's resource location/identifier
-     * @param block The block that the item should place
-     * @param settings The properties/settings to be applied to the block's item
-     * @return The registered block item
-     */
-    @Deprecated
-    public static Item makeOldBlockItem(ResourceLocation id, Block block, Item.Properties settings) {
-        Item blockItem = new BlockItem(block, settings.setId(ResourceKey.create(Registries.ITEM, id)));
-        return Registry.register(BuiltInRegistries.ITEM, id, blockItem);
-    }
-
 }
